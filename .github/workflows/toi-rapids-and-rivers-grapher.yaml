@@ -26,7 +26,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           chmod +x ./gradlew
-          ./gradlew :apps:${APP_NAME}:test :apps:${APP_NAME}:build
+          ./gradlew test build
       - name: Docker login
         uses: docker/login-action@v2
         with:
@@ -35,7 +35,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build and publish docker image
         run: |
-          docker build --tag ${IMAGE} apps/${APP_NAME}
+          docker build --tag ${IMAGE} .
           docker push ${IMAGE}
   deploy-to-dev-gcp:
     name: Deploy to dev-gcp
