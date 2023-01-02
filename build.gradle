@@ -1,0 +1,39 @@
+plugins {
+    id 'application'
+    id 'org.jetbrains.kotlin.jvm' version '1.7.10'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven {
+        url "https://packages.confluent.io/maven"
+    }
+}
+
+application {
+    mainClass = "no.nav.rapidsandriversgrapher.ApplicationKt"
+}
+
+test {
+    useJUnitPlatform()
+}
+
+dependencies {
+    // Logging
+    implementation("org.slf4j:slf4j-api:2.0.5")
+    implementation("ch.qos.logback:logback-classic:1.4.5")
+    implementation("net.logstash.logback:logstash-logback-encoder:7.2")
+
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.4.1"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    testImplementation "org.junit.jupiter:junit-jupiter:5.9.1"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:5.9.1"
+    testImplementation "org.junit.jupiter:junit-jupiter-params:5.9.1"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.9.1"
+    testImplementation "org.assertj:assertj-core:3.23.1"
+    testImplementation "org.testcontainers:kafka:1.17.6"
+    implementation "org.apache.kafka:kafka-clients:3.3.1"
+}

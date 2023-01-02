@@ -1,0 +1,12 @@
+apiVersion: nais.io/v1
+kind: Naisjob
+metadata:
+  labels:
+    team: toi
+  name: toi-rapids-and-rivers-grapher
+  namespace: toi
+spec:
+  kafka:
+    pool: {{ kafka_pool }}
+  image: {{ image }}
+  schedule: "0 0 * * *"
