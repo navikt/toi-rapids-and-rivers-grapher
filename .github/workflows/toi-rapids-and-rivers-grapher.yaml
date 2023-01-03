@@ -50,3 +50,16 @@ jobs:
           CLUSTER: dev-gcp
           RESOURCE: nais.yaml
           VARS: nais-dev.yaml
+  deploy-to-prod-gcp:
+    name: Deploy to prod-gcp
+    needs: build-and-publish
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: nais/deploy/actions/deploy@v1
+        env:
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          CLUSTER: prod-gcp
+          RESOURCE: nais.yaml
+          VARS: nais-prod.yaml
