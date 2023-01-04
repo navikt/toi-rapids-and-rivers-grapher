@@ -1,15 +1,14 @@
 package no.nav.rapidsandriversgrapher
 
 class Grapher {
-    private val hendelser = mutableListOf<Hendelse>()
+    private var systemKart = setOf<Node>()
     fun lesHendelse(hendelse: Hendelse) {
-        hendelser+=hendelse
+        systemKart = systemKart `merge med` hendelse.systemKart()
     }
 
     fun tilMermaid() = "```mermaid\n" +
             "graph TD;\n" +
-            hendelser.map(Hendelse::systemKart).reduce { acc, list -> acc `merge med` list }
-                .joinToString("\n", transform = Node::toMermaid) +
+            systemKart.joinToString("\n", transform = Node::toMermaid) +
             "\n```"
 
 }
