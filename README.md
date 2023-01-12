@@ -4,10 +4,10 @@ Denne applikasjonen kjører hver midnatt og logger en mermaid-graf som viser hvo
 ```mermaid
 graph TD;
 foresporsel-om-deling-av-cv-api --> rekrutteringsbistand-stilling-api;
-presenterte-kandidater-api;
 rekrutteringsbistand-statistikk-api --> rekrutteringsbistand-stilling-api;
 rekrutteringsbistand-statistikk-api --> toi-identmapper;
 rekrutteringsbistand-stilling-api --> foresporsel-om-deling-av-cv-api;
+rekrutteringsbistand-stilling-api --> presenterte-kandidater-api;
 rekrutteringsbistand-stilling-api --> rekrutteringsbistand-statistikk-api;
 toi-arbeidsmarked-cv --> toi-sammenstille-kandidat;
 toi-cv --> toi-sammenstille-kandidat;
