@@ -1,6 +1,7 @@
 # Autogenerer graph over trafikken på toi-rapiden
 Denne applikasjonen kjører hver midnatt og logger en mermaid-graf som viser hvordan applikasjonene på rapiden prater sammen:
 
+Oppdatert 2023-01-12
 ```mermaid
 graph TD;
 foresporsel-om-deling-av-cv-api --> rekrutteringsbistand-stilling-api;
