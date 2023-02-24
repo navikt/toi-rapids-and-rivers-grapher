@@ -1,5 +1,6 @@
 package no.nav.rapidsandriversgrapher
 
+import no.nav.rapidsandriversgrapher.GyldigHendelse.Companion.tilHendelse
 import org.apache.kafka.clients.CommonClientConfigs
 import org.apache.kafka.clients.consumer.ConsumerConfig
 import org.apache.kafka.clients.consumer.ConsumerRecord
@@ -26,7 +27,7 @@ fun startApplication(mermaidWriter: (String) -> Unit, envs: Map<String, String>)
         log.info("Posisjonen er: ${consumer.position(topics[0])}")
         consumer.poll(Duration.ofSeconds(1))
             .map(ConsumerRecord<String, String>::value)
-            .map(::Hendelse)
+            .map {it.tilHendelse()}
             .forEach(grapher::lesHendelse)
     }
     mermaidWriter(grapher.tilMermaid())

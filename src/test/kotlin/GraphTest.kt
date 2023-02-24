@@ -1,5 +1,6 @@
 package no.nav.rapidsandriversgrapher
 
+import no.nav.rapidsandriversgrapher.GyldigHendelse.Companion.tilHendelse
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
@@ -18,8 +19,24 @@ class GraphTest {
             toi-synlighetsmotor;
             toi-oppfolgingsperiode --> toi-sammenstille-kandidat;
             ```
-        """.trimIndent(), Grapher().apply { hendelser.map(::Hendelse).forEach(::lesHendelse) }
+        """.trimIndent(), Grapher().apply { hendelser.map { it.tilHendelse() }.forEach(::lesHendelse) }
             .tilMermaid())
+    }
+
+    @Test
+    fun ignorererUglydigeHendelser() {
+        assertEquals("""
+            ```mermaid
+            graph TD;
+            
+            ```
+        """.trimIndent(), Grapher().apply { lesHendelse(ugyldigJsonHendelse.tilHendelse()) }.tilMermaid())
+        assertEquals("""
+            ```mermaid
+            graph TD;
+            
+            ```
+        """.trimIndent(), Grapher().apply { lesHendelse(ugyldigSystemParticipatingServicesHendelse.tilHendelse()) }.tilMermaid())
     }
 }
 val hendelser = listOf(
@@ -423,3 +440,83 @@ val hendelser = listOf(
         }
     """.trimIndent()
 )
+
+private val ugyldigJsonHendelse = """
+        {
+          "fodselsnummer": "07067106126",
+          "oppfølgingsinformasjon": {
+            "fodselsnummer": "07067106126",
+            "formidlingsgruppe": "IARBS",
+            "iservFraDato": null,
+            "fornavn": "Sitrongul",
+            "etternavn": "Ingress",
+            "oppfolgingsenhet": "0111",
+            "kvalifiseringsgruppe": "VARIG",
+            "rettighetsgruppe": "AAP",
+            "hovedmaal": "OKEDELT",
+            "sikkerhetstiltakType": null,
+            "diskresjonskode": null,
+            "harOppfolgingssak": true,
+            "sperretAnsatt": false,
+            "erDoed": false,
+            "doedFraDato": null,
+            "sistEndretDato": "2022-12-27T08:34:38+01:00"
+          },
+          "@event_name": "oppfølgingsinformasjon",
+          "@id": "ed539830-56ba-4363-8704-41a120ae5b9f",
+          "@opprettet": "2022-12-27T08:35:03.172578743",
+          "system_read_count": 1,
+          "system_participating_services": [
+            {
+              "id": "ed539830-56ba-4363-8704-41a120ae5b9f",
+              "time": "2022-12-27T08:35:03.172578743",
+              "service": "toi-oppfolgingsinformasjon",
+              "instance": "toi-oppfolgingsinformasjon-59d48ccf8b-72nxv",
+              "image": "ghcr.io/navikt/toi-rapids-and-rivers/toi-oppfolgingsinformasjon:333dd8d9c539a459adbb27470d7151656f9b1a90"
+            },
+            {
+              "id": "ed539830-56ba-4363-8704-41a120ae5b9f",
+              "time": "2022-12-27T08:35:03.180677290",
+              "service": "toi-identmapper",
+              "instance": "toi-identmapper-9dd7454d7-r5r8x",
+              "image": "ghcr.io/navikt/toi-rapids-and-rivers/toi-identmapper:333dd8d9c539a459adbb27470d7151656f9b1a90"
+            }
+          ],
+          "aktørId": "2688175577173",
+        }
+""".trimIndent()
+private val ugyldigSystemParticipatingServicesHendelse = """
+        {
+          "fodselsnummer": "07067106126",
+          "oppfølgingsinformasjon": {
+            "fodselsnummer": "07067106126",
+            "formidlingsgruppe": "IARBS",
+            "iservFraDato": null,
+            "fornavn": "Sitrongul",
+            "etternavn": "Ingress",
+            "oppfolgingsenhet": "0111",
+            "kvalifiseringsgruppe": "VARIG",
+            "rettighetsgruppe": "AAP",
+            "hovedmaal": "OKEDELT",
+            "sikkerhetstiltakType": null,
+            "diskresjonskode": null,
+            "harOppfolgingssak": true,
+            "sperretAnsatt": false,
+            "erDoed": false,
+            "doedFraDato": null,
+            "sistEndretDato": "2022-12-27T08:34:38+01:00"
+          },
+          "@event_name": "oppfølgingsinformasjon",
+          "@id": "ed539830-56ba-4363-8704-41a120ae5b9f",
+          "@opprettet": "2022-12-27T08:35:03.172578743",
+          "system_read_count": 1,
+          "system_participating_services": {
+              "id": "ed539830-56ba-4363-8704-41a120ae5b9f",
+              "time": "2022-12-27T08:35:03.172578743",
+              "service": "toi-oppfolgingsinformasjon",
+              "instance": "toi-oppfolgingsinformasjon-59d48ccf8b-72nxv",
+              "image": "ghcr.io/navikt/toi-rapids-and-rivers/toi-oppfolgingsinformasjon:333dd8d9c539a459adbb27470d7151656f9b1a90"
+            },
+          "aktørId": "2688175577173"
+        }
+""".trimIndent()
