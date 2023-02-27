@@ -1,17 +1,20 @@
 # Autogenerer graph over trafikken på toi-rapiden
 Denne applikasjonen kjører hver midnatt og logger en mermaid-graf som viser hvordan applikasjonene på rapiden prater sammen:
 
-Oppdatert 2023-01-12
+Oppdatert 2023-02-27
 ```mermaid
 graph TD;
 foresporsel-om-deling-av-cv-api --> rekrutteringsbistand-stilling-api;
+rekrutteringsbistand-kandidat-api --> foresporsel-om-deling-av-cv-api;
+rekrutteringsbistand-kandidat-api --> rekrutteringsbistand-statistikk-api;
+rekrutteringsbistand-kandidat-api --> rekrutteringsbistand-stilling-api;
 rekrutteringsbistand-statistikk-api --> rekrutteringsbistand-stilling-api;
 rekrutteringsbistand-statistikk-api --> toi-identmapper;
 rekrutteringsbistand-stilling-api --> foresporsel-om-deling-av-cv-api;
 rekrutteringsbistand-stilling-api --> presenterte-kandidater-api;
 rekrutteringsbistand-stilling-api --> rekrutteringsbistand-statistikk-api;
+toi-arbeidsgiver-notifikasjon;
 toi-arbeidsmarked-cv --> toi-sammenstille-kandidat;
-toi-cv --> toi-sammenstille-kandidat;
 toi-fritatt-kandidatsok --> toi-identmapper;
 toi-helseapp;
 toi-hjemmel --> toi-sammenstille-kandidat;
