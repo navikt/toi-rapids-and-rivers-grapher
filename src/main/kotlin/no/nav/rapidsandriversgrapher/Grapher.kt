@@ -8,7 +8,10 @@ class Grapher {
 
     fun tilMermaid() = "```mermaid\n" +
             "graph TD;\n" +
-            systemKart.toList().sortedBy { it.toMermaid() }.joinToString("\n", transform = Node::toMermaid) +
+            systemKart
+                .map(Node::toMermaid)
+                .toSortedSet()
+                .joinToString("\n") +
             "\n```"
 
 }
