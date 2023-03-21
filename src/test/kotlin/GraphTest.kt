@@ -24,9 +24,9 @@ class GraphTest {
     }
 
     @Test
-    fun byggGrapherPerEvent() {
-        val mermaidGraphPerEvent = Grapher().apply { hendelser.map { it.tilHendelse() }.forEach(::lesHendelse) }
-            .tilMermaidGraphPerEvent()
+    fun byggGraphForEventUtenEdges() {
+        TODO("Kanskje vi bare kan droppe denne testen? Trenger vi å synliggjøre eventer uten edger, eller er det " +
+                "kanskje nyttig å synliggjøre? Lage trello-oppgave på?")
         assertEquals("""
             ```mermaid
             graph TD;
@@ -39,7 +39,14 @@ class GraphTest {
             toi-synlighetsmotor;
             
             ```
-        """.trimIndent(), mermaidGraphPerEvent["kandidat.cv-delt-med-arbeidsgiver-via-rekrutteringsbistand"])
+        """.trimIndent(), Grapher().apply { hendelser.map { it.tilHendelse() }.forEach(::lesHendelse) }
+            .tilMermaidGraphPerEvent()["kandidat.cv-delt-med-arbeidsgiver-via-rekrutteringsbistand"])
+    }
+
+    @Test
+    fun byggGrapherPerEvent() {
+        val mermaidGraphPerEvent = Grapher().apply { hendelser.map { it.tilHendelse() }.forEach(::lesHendelse) }
+            .tilMermaidGraphPerEvent()
         assertEquals("""
             ```mermaid
             ---
