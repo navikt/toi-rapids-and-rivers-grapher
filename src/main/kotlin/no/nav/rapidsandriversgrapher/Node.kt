@@ -1,6 +1,6 @@
 package no.nav.rapidsandriversgrapher
 
-class Node(private val navn: String) {
+class Node(val navn: String) {
     private val borderNodes = mutableSetOf<Node>()
     fun pathTo(besøker: Node) {
         borderNodes+=besøker
