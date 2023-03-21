@@ -6,12 +6,12 @@ class Grapher {
         systemKart = systemKart `merge med` hendelse.systemKart()
     }
 
-    fun tilMermaid() = "```mermaid\n" +
-            "graph TD;\n" +
+    fun tilMermaid() =
             systemKart
                 .map(Node::toMermaid)
                 .toSortedSet()
-                .joinToString("\n") +
-            "\n```"
-
+                .joinToString(
+                    separator = "\n",
+                    prefix = "```mermaid\ngraph TD;\n",
+                    postfix = "\n```")
 }
