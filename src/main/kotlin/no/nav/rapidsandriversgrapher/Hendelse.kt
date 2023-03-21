@@ -14,21 +14,24 @@ class UgyldigHendelse(e: Exception) : Hendelse {
     override fun systemKart(): Set<Node> = emptySet()
 }
 
-class GyldigHendelse private constructor(private val besøkteServicer: List<String>): Hendelse {
+class GyldigHendelse private constructor(private val eventName: String, private val besøkteServicer: List<String>): Hendelse {
     override fun systemKart(): Set<Node> {
         val noder = besøkteServicer.indices.map { Node.fra(besøkteServicer[it])}
-        (0 until besøkteServicer.size-1).forEach { noder[it].pathTo(noder[it+1]) }
+        (0 until besøkteServicer.size-1).forEach { noder[it].pathTo(noder[it+1], ) }
         return noder.toSet()
     }
 
     companion object {
         fun String.tilHendelse() = try {
-            GyldigHendelse(parseBesøkteServicer())
+            GyldigHendelse(parseEventName(), parseBesøkteServicer())
         } catch (e: Exception) {
             UgyldigHendelse(e)
         }
     }
 }
+
+private fun String.parseBesøkteServicer(): List<String> =
+    Json.parseToJsonElement(this).jsonObject
 
 private fun String.parseBesøkteServicer(): List<String> =
     Json.parseToJsonElement(this).jsonObject["system_participating_services"]

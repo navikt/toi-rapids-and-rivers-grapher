@@ -1,12 +1,15 @@
 package no.nav.rapidsandriversgrapher
 
 class Node(private val navn: String) {
-    private val borderNodes = mutableSetOf<Node>()
-    fun pathTo(besøker: Node) {
-        borderNodes+=besøker
+    private val borderNodesPerEventName = mutableMapOf<String, List<Node>>()
+    fun pathTo(besøker: Node, eventName: String) {
+        borderNodesPerEventName.compute(eventName) { _, noder ->
+            if(noder == null) listOf(besøker) else noder+besøker
+        }
     }
 
-    fun toMermaid() = if(borderNodes.isEmpty()) "$navn;" else borderNodes.joinToString("\n") { "$navn --> ${it.navn};" }
+    fun toMermaid() = if(borderNodesPerEventName.isEmpty()) "$navn;" else borderNodesPerEventName
+        .flatMap { it.value }.joinToString("\n") { "$navn --> ${it.navn};" }
 
     companion object {
         private val noder = mutableMapOf<String, Node>()
