@@ -8,7 +8,8 @@ class Grapher {
 
     fun tilMermaidGraph() =
             systemKart
-                .map(Node::toMermaid)
+                .flatMap(Node::toEdges)
+                .map(Edge::toMermaidInstruction)
                 .toSortedSet()
                 .joinToString(
                     separator = "\n",

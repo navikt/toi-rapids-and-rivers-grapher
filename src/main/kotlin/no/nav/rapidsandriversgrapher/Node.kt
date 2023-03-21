@@ -1,22 +1,18 @@
 package no.nav.rapidsandriversgrapher
 
 class Node(private val navn: String) {
-    private val borderNodesPerEventName = mutableMapOf<String, List<Node>>()
+    private val edges = mutableListOf<Edge>()
     fun pathTo(besøker: Node, eventName: String) {
-        borderNodesPerEventName.compute(eventName) { _, noder ->
-            if(noder == null) listOf(besøker) else noder+besøker
-        }
+        val edge = edges.firstOrNull { it.isEdgeOf(this.navn to besøker.navn) }
+        if(edge==null) edges+=ExistingEdge(this.navn, besøker.navn, listOf(eventName))
+        else edge.addEventName(eventName)
     }
 
-    fun toMermaid() = if(borderNodesPerEventName.isEmpty()) "$navn;" else borderNodesPerEventName
-        .flatMap { it.value }
-        .distinct()
-        .joinToString("\n") { "$navn --> ${it.navn};" }
+    fun toEdges() = if(edges.isEmpty()) listOf(NoEdges(navn)) else edges
 
     companion object {
         private val noder = mutableMapOf<String, Node>()
         fun fra(besøktService: String) = noder.computeIfAbsent(besøktService) {Node(besøktService)}
     }
-
 }
 infix fun Set<Node>.`merge med`(other: Set<Node>) = this + other
