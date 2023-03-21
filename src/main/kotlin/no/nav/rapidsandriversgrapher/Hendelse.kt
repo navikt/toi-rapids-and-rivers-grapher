@@ -1,9 +1,7 @@
 package no.nav.rapidsandriversgrapher
 
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.jsonArray
-import kotlinx.serialization.json.jsonObject
-import kotlinx.serialization.json.jsonPrimitive
+import com.fasterxml.jackson.databind.JsonNode
+import kotlinx.serialization.json.*
 
 interface Hendelse {
     fun systemKart(): Set<Node>
@@ -32,5 +30,9 @@ class GyldigHendelse private constructor(private val besøkteServicer: List<Stri
     }
 }
 
-private fun String.parseBesøkteServicer() =
-    Json.parseToJsonElement(this).jsonObject["system_participating_services"]?.jsonArray?.map { it.jsonObject["service"] }?.map { it?.jsonPrimitive?.content ?: throw Exception("Klarte ikke hente ut service-felt fra system_participating_services") } ?: emptyList()
+private fun String.parseBesøkteServicer(): List<String> =
+    Json.parseToJsonElement(this).jsonObject["system_participating_services"]
+        ?.jsonArray?.map { it.jsonObject["service"] }?.map { (it.asTextNullable()) ?: throw Exception("Klarte ikke hente ut service-felt fra system_participating_services") } ?: emptyList()
+
+
+fun JsonElement?.asTextNullable() = this?.jsonPrimitive?.content
