@@ -1,6 +1,5 @@
 package no.nav.rapidsandriversgrapher
 
-import com.fasterxml.jackson.databind.JsonNode
 import kotlinx.serialization.json.*
 
 interface Hendelse {
@@ -17,7 +16,7 @@ class UgyldigHendelse(e: Exception) : Hendelse {
 class GyldigHendelse private constructor(private val eventName: String, private val besøkteServicer: List<String>): Hendelse {
     override fun systemKart(): Set<Node> {
         val noder = besøkteServicer.indices.map { Node.fra(besøkteServicer[it])}
-        (0 until besøkteServicer.size-1).forEach { noder[it].pathTo(noder[it+1], ) }
+        (0 until besøkteServicer.size-1).forEach { noder[it].pathTo(noder[it+1], eventName) }
         return noder.toSet()
     }
 
@@ -30,8 +29,8 @@ class GyldigHendelse private constructor(private val eventName: String, private 
     }
 }
 
-private fun String.parseBesøkteServicer(): List<String> =
-    Json.parseToJsonElement(this).jsonObject
+private fun String.parseEventName(): String =
+    Json.parseToJsonElement(this).jsonObject["@event_name"].asTextNullable() ?: "unknown event"
 
 private fun String.parseBesøkteServicer(): List<String> =
     Json.parseToJsonElement(this).jsonObject["system_participating_services"]

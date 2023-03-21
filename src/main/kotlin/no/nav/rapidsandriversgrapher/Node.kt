@@ -9,7 +9,9 @@ class Node(private val navn: String) {
     }
 
     fun toMermaid() = if(borderNodesPerEventName.isEmpty()) "$navn;" else borderNodesPerEventName
-        .flatMap { it.value }.joinToString("\n") { "$navn --> ${it.navn};" }
+        .flatMap { it.value }
+        .distinct()
+        .joinToString("\n") { "$navn --> ${it.navn};" }
 
     companion object {
         private val noder = mutableMapOf<String, Node>()
