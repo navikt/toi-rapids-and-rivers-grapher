@@ -30,7 +30,7 @@ fun startApplication(mermaidWriter: (String) -> Unit, envs: Map<String, String>)
             .map {it.tilHendelse()}
             .forEach(grapher::lesHendelse)
     }
-    mermaidWriter(grapher.tilMermaid())
+    mermaidWriter(grapher.tilMermaidGraph())
 }
 
 fun consumerConfig(envs: Map<String, String>) = mutableMapOf<String, Any>(

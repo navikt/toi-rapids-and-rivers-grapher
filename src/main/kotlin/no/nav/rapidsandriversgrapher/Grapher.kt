@@ -6,7 +6,7 @@ class Grapher {
         systemKart = systemKart `merge med` hendelse.systemKart()
     }
 
-    fun tilMermaid() =
+    fun tilMermaidGraph() =
             systemKart
                 .map(Node::toMermaid)
                 .toSortedSet()
@@ -14,4 +14,8 @@ class Grapher {
                     separator = "\n",
                     prefix = "```mermaid\ngraph TD;\n",
                     postfix = "\n```")
+
+    fun tilMermaidGraphPerEvent(): Map<String, String> {
+        TODO("Not yet implemented")
+    }
 }

@@ -20,7 +20,98 @@ class GraphTest {
             toi-synlighetsmotor;
             ```
         """.trimIndent(), Grapher().apply { hendelser.map { it.tilHendelse() }.forEach(::lesHendelse) }
-            .tilMermaid())
+            .tilMermaidGraph())
+    }
+
+    @Test
+    fun byggGrapherPerEvent() {
+        val mermaidGraphPerEvent = Grapher().apply { hendelser.map { it.tilHendelse() }.forEach(::lesHendelse) }
+            .tilMermaidGraphPerEvent()
+        assertEquals("""
+            ```mermaid
+            graph TD;
+            rekrutteringsbistand-stilling-api;
+            toi-arbeidsmarked-cv --> toi-sammenstille-kandidat;
+            toi-identmapper --> toi-sammenstille-kandidat;
+            toi-oppfolgingsinformasjon --> toi-identmapper;
+            toi-oppfolgingsperiode --> toi-sammenstille-kandidat;
+            toi-sammenstille-kandidat --> toi-synlighetsmotor;
+            toi-synlighetsmotor;
+            
+            ```
+        """.trimIndent(), mermaidGraphPerEvent["kandidat.cv-delt-med-arbeidsgiver-via-rekrutteringsbistand"])
+        assertEquals("""
+            ```mermaid
+            ---
+            title: oppfølgingsinformasjon
+            ---
+            graph TD;
+            rekrutteringsbistand-stilling-api;
+            toi-arbeidsmarked-cv --> toi-sammenstille-kandidat;
+            toi-identmapper --> toi-sammenstille-kandidat;
+            toi-oppfolgingsinformasjon --> toi-identmapper;
+            toi-oppfolgingsperiode --> toi-sammenstille-kandidat;
+            toi-sammenstille-kandidat --> toi-synlighetsmotor;
+            toi-synlighetsmotor;
+            
+            linkStyle 2 stroke:red;
+            ```
+        """.trimIndent(), mermaidGraphPerEvent["oppfølgingsinformasjon"])
+        assertEquals("""
+            ```mermaid
+            ---
+            title: arbeidsmarked-cv.sammenstilt
+            ---
+            graph TD;
+            rekrutteringsbistand-stilling-api;
+            toi-arbeidsmarked-cv --> toi-sammenstille-kandidat;
+            toi-identmapper --> toi-sammenstille-kandidat;
+            toi-oppfolgingsinformasjon --> toi-identmapper;
+            toi-oppfolgingsperiode --> toi-sammenstille-kandidat;
+            toi-sammenstille-kandidat --> toi-synlighetsmotor;
+            toi-synlighetsmotor;
+            
+            linkStyle 0 stroke:red;
+            linkStyle 4 stroke:red;
+            ```
+        """.trimIndent(), mermaidGraphPerEvent["arbeidsmarked-cv.sammenstilt"])
+        assertEquals("""
+            ```mermaid
+            ---
+            title: oppfølgingsperiode.sammenstilt
+            ---
+            graph TD;
+            rekrutteringsbistand-stilling-api;
+            toi-arbeidsmarked-cv --> toi-sammenstille-kandidat;
+            toi-identmapper --> toi-sammenstille-kandidat;
+            toi-oppfolgingsinformasjon --> toi-identmapper;
+            toi-oppfolgingsperiode --> toi-sammenstille-kandidat;
+            toi-sammenstille-kandidat --> toi-synlighetsmotor;
+            toi-synlighetsmotor;
+            
+            linkStyle 3 stroke:red;
+            linkStyle 4 stroke:red;
+            ```
+        """.trimIndent(), mermaidGraphPerEvent["oppfølgingsperiode.sammenstilt"])
+        assertEquals("""
+            ```mermaid
+            ---
+            title: oppfølgingsinformasjon.sammenstilt
+            ---
+            graph TD;
+            rekrutteringsbistand-stilling-api;
+            toi-arbeidsmarked-cv --> toi-sammenstille-kandidat;
+            toi-identmapper --> toi-sammenstille-kandidat;
+            toi-oppfolgingsinformasjon --> toi-identmapper;
+            toi-oppfolgingsperiode --> toi-sammenstille-kandidat;
+            toi-sammenstille-kandidat --> toi-synlighetsmotor;
+            toi-synlighetsmotor;
+            
+            linkStyle 1 stroke:red;
+            linkStyle 2 stroke:red;
+            linkStyle 4 stroke:red;
+            ```
+        """.trimIndent(), mermaidGraphPerEvent["oppfølgingsinformasjon.sammenstilt"])
     }
 
     @Test
@@ -30,15 +121,34 @@ class GraphTest {
             graph TD;
             
             ```
-        """.trimIndent(), Grapher().apply { lesHendelse(ugyldigJsonHendelse.tilHendelse()) }.tilMermaid())
+        """.trimIndent(), Grapher().apply { lesHendelse(ugyldigJsonHendelse.tilHendelse()) }.tilMermaidGraph())
         assertEquals("""
             ```mermaid
             graph TD;
             
             ```
-        """.trimIndent(), Grapher().apply { lesHendelse(ugyldigSystemParticipatingServicesHendelse.tilHendelse()) }.tilMermaid())
+        """.trimIndent(), Grapher().apply { lesHendelse(ugyldigSystemParticipatingServicesHendelse.tilHendelse()) }.tilMermaidGraph())
     }
 }
+/*
+kandidat.cv-delt-med-arbeidsgiver-via-rekrutteringsbistand
+kandidat.cv-delt-med-arbeidsgiver-via-rekrutteringsbistand
+oppfølgingsinformasjon
+arbeidsmarked-cv.sammenstilt
+oppfølgingsperiode.sammenstilt
+oppfølgingsinformasjon
+oppfølgingsinformasjon.sammenstilt
+oppfølgingsinformasjon
+oppfølgingsinformasjon
+
+----
+
+kandidat.cv-delt-med-arbeidsgiver-via-rekrutteringsbistand
+oppfølgingsinformasjon
+arbeidsmarked-cv.sammenstilt
+oppfølgingsperiode.sammenstilt
+oppfølgingsinformasjon.sammenstilt
+ */
 val hendelser = listOf(
     """
         {
