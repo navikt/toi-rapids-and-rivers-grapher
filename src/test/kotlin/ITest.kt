@@ -31,12 +31,12 @@ class ITest {
             ```mermaid
             graph TD;
             rekrutteringsbistand-stilling-api;
-            toi-oppfolgingsinformasjon --> toi-identmapper;
-            toi-identmapper --> toi-sammenstille-kandidat;
             toi-arbeidsmarked-cv --> toi-sammenstille-kandidat;
+            toi-identmapper --> toi-sammenstille-kandidat;
+            toi-oppfolgingsinformasjon --> toi-identmapper;
+            toi-oppfolgingsperiode --> toi-sammenstille-kandidat;
             toi-sammenstille-kandidat --> toi-synlighetsmotor;
             toi-synlighetsmotor;
-            toi-oppfolgingsperiode --> toi-sammenstille-kandidat;
             ```
         """.trimIndent(), mermaids[0])
     }
