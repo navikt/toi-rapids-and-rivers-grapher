@@ -565,7 +565,7 @@ fun events() = listOf(
     """.trimIndent()
 )
 
-private val invalidJsonEvent = """
+val invalidJsonEvent = """
         {
           "fodselsnummer": "07067106126",
           "oppfølgingsinformasjon": {
