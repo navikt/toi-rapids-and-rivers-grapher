@@ -14,4 +14,6 @@ class Edge(private val startNode: Node, private val endNode: Node, eventNames: L
         if(it!=0) it else endNode.compareTo(other.endNode)
     }
     fun hasNode(node: Node) = startNode == node || endNode == node
+
+    fun hasEvent(event: String) = event in eventNames
 }

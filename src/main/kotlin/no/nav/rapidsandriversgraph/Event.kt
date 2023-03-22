@@ -5,6 +5,7 @@ import org.apache.kafka.clients.consumer.ConsumerRecord
 
 interface Event {
     fun toNodes(): Set<Node>
+    val eventName: String
 }
 
 class InvalidEvent(e: Exception) : Event {
@@ -12,10 +13,15 @@ class InvalidEvent(e: Exception) : Event {
         log.warn("ignorerer event som kaster feilmelding ved parsing", e)
     }
 
+    override val eventName: String
+        get(){
+            throw NotImplementedError()
+        }
+
     override fun toNodes(): Set<Node> = emptySet()
 }
 
-class ValidEvent(private val eventName: String, private val besøkteRapidServicer: List<String>) : Event {
+class ValidEvent(override val eventName: String, private val besøkteRapidServicer: List<String>) : Event {
     override fun toNodes(): Set<Node> {
         val noder = besøkteRapidServicer.indices.map { Node.fra(besøkteRapidServicer[it]) }
         (0 until besøkteRapidServicer.size - 1).forEach { noder[it].addEdgeTo(noder[it + 1], eventName) }
