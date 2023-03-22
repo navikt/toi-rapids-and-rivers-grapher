@@ -6,6 +6,8 @@ import org.apache.kafka.clients.producer.ProducerConfig
 import org.apache.kafka.clients.producer.ProducerRecord
 import org.apache.kafka.common.config.SaslConfigs
 import org.apache.kafka.common.serialization.StringSerializer
+import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeAll
@@ -37,7 +39,81 @@ class ITest {
             toi-oppfolgingsperiode --> toi-sammenstille-kandidat;
             toi-sammenstille-kandidat --> toi-synlighetsmotor;
             ```
-        """.trimIndent(), mermaids[0])
+            ```mermaid
+            ---
+            title: kandidat.cv-delt-med-arbeidsgiver-via-rekrutteringsbistand
+            ---
+            graph TD;
+            rekrutteringsbistand-stilling-api;
+            toi-arbeidsmarked-cv --> toi-sammenstille-kandidat;
+            toi-identmapper --> toi-sammenstille-kandidat;
+            toi-oppfolgingsinformasjon --> toi-identmapper;
+            toi-oppfolgingsperiode --> toi-sammenstille-kandidat;
+            toi-sammenstille-kandidat --> toi-synlighetsmotor;
+            
+            
+            ```
+            ```mermaid
+            ---
+            title: oppfølgingsinformasjon
+            ---
+            graph TD;
+            rekrutteringsbistand-stilling-api;
+            toi-arbeidsmarked-cv --> toi-sammenstille-kandidat;
+            toi-identmapper --> toi-sammenstille-kandidat;
+            toi-oppfolgingsinformasjon --> toi-identmapper;
+            toi-oppfolgingsperiode --> toi-sammenstille-kandidat;
+            toi-sammenstille-kandidat --> toi-synlighetsmotor;
+            
+            linkStyle 2 stroke:red;
+            ```
+            ```mermaid
+            ---
+            title: arbeidsmarked-cv.sammenstilt
+            ---
+            graph TD;
+            rekrutteringsbistand-stilling-api;
+            toi-arbeidsmarked-cv --> toi-sammenstille-kandidat;
+            toi-identmapper --> toi-sammenstille-kandidat;
+            toi-oppfolgingsinformasjon --> toi-identmapper;
+            toi-oppfolgingsperiode --> toi-sammenstille-kandidat;
+            toi-sammenstille-kandidat --> toi-synlighetsmotor;
+            
+            linkStyle 0 stroke:red;
+            linkStyle 4 stroke:red;
+            ```
+            ```mermaid
+            ---
+            title: oppfølgingsperiode.sammenstilt
+            ---
+            graph TD;
+            rekrutteringsbistand-stilling-api;
+            toi-arbeidsmarked-cv --> toi-sammenstille-kandidat;
+            toi-identmapper --> toi-sammenstille-kandidat;
+            toi-oppfolgingsinformasjon --> toi-identmapper;
+            toi-oppfolgingsperiode --> toi-sammenstille-kandidat;
+            toi-sammenstille-kandidat --> toi-synlighetsmotor;
+            
+            linkStyle 3 stroke:red;
+            linkStyle 4 stroke:red;
+            ```
+            ```mermaid
+            ---
+            title: oppfølgingsinformasjon.sammenstilt
+            ---
+            graph TD;
+            rekrutteringsbistand-stilling-api;
+            toi-arbeidsmarked-cv --> toi-sammenstille-kandidat;
+            toi-identmapper --> toi-sammenstille-kandidat;
+            toi-oppfolgingsinformasjon --> toi-identmapper;
+            toi-oppfolgingsperiode --> toi-sammenstille-kandidat;
+            toi-sammenstille-kandidat --> toi-synlighetsmotor;
+            
+            linkStyle 1 stroke:red;
+            linkStyle 2 stroke:red;
+            linkStyle 4 stroke:red;
+            ```
+        """.trimIndent(), mermaids.first())
     }
     companion object {
         private val kafkaContainer = KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:7.3.1"))

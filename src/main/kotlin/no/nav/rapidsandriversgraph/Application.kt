@@ -27,7 +27,9 @@ fun startApplication(mermaidWriter: (String) -> Unit, envs: Map<String, String>)
             .map {it.tilEvent()}
             .forEach(graph::lesInnEvent)
     }
-    mermaidWriter(graph.tilMermaidGraph())
+    val wholeGraph = listOf(graph.tilMermaidGraph())
+    val graphPerEvent = graph.tilMermaidGraphPerEvent().map { it.value }
+    mermaidWriter((wholeGraph+graphPerEvent).joinToString("\n"))
 }
 
 fun consumerConfig(envs: Map<String, String>) = mutableMapOf<String, Any>(
