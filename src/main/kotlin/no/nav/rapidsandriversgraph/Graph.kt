@@ -41,7 +41,7 @@ class Graph {
             val start = (nodeMermaidTextDefinition() + edgeMermaidTextDefinition())
                 .joinToString(
                     separator = "\n",
-                    prefix = "```mermaid\ngraph TD;\n",
+                    prefix = "```mermaid\n---\ntitle: $eventName\n---\ngraph TD;\n",
                     postfix = ""
                 )
 
@@ -50,10 +50,11 @@ class Graph {
 
             val midten = sortedEdges()
                 .mapIndexed { index, d ->
-                    d to "linkStyle $index stroke:red;\n"
+                    d to "linkStyle $index stroke:red;"
                 }.filter { it.first.hasEvent(eventName) }
+                .map(Pair<Edge, String>::second)
 
-            val verdi = start + "\n" + midten + slutt
+            val verdi = midten.joinToString(separator = "\n", prefix = "$start\n\n", postfix = slutt)
 
             eventName to verdi
         }.toMap()

@@ -37,13 +37,12 @@ class GraphTest {
 
     @Test
     fun byggGraphForEventUtenEdges() {
-        TODO(
-            "Kanskje vi bare kan droppe denne testen? Trenger vi å synliggjøre eventer uten edger, eller er det " +
-                    "kanskje nyttig å synliggjøre? Lage trello-oppgave på?"
-        )
         assertEquals(
             """
             ```mermaid
+            ---
+            title: kandidat.cv-delt-med-arbeidsgiver-via-rekrutteringsbistand
+            ---
             graph TD;
             rekrutteringsbistand-stilling-api;
             toi-arbeidsmarked-cv --> toi-sammenstille-kandidat;
@@ -51,6 +50,7 @@ class GraphTest {
             toi-oppfolgingsinformasjon --> toi-identmapper;
             toi-oppfolgingsperiode --> toi-sammenstille-kandidat;
             toi-sammenstille-kandidat --> toi-synlighetsmotor;
+            
             
             ```
         """.trimIndent(),
