@@ -8,7 +8,7 @@ class Node private constructor(private val navn: String) {
         else edge.addEventName(eventName)
     }
 
-    fun toEdges() = edges
+    fun toEdges() = if(edges.isEmpty()) listOf(NoEdges(navn)) else edges
 
     companion object {
         private val noder = mutableMapOf<RapidServiceNavn, Node>()
