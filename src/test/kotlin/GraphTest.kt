@@ -30,7 +30,6 @@ class GraphTest {
             toi-oppfolgingsinformasjon --> toi-identmapper;
             toi-oppfolgingsperiode --> toi-sammenstille-kandidat;
             toi-sammenstille-kandidat --> toi-synlighetsmotor;
-            toi-synlighetsmotor;
             ```
         """.trimIndent(),
             lagTestGraph().tilMermaidGraph()
@@ -53,7 +52,6 @@ class GraphTest {
             toi-oppfolgingsinformasjon --> toi-identmapper;
             toi-oppfolgingsperiode --> toi-sammenstille-kandidat;
             toi-sammenstille-kandidat --> toi-synlighetsmotor;
-            toi-synlighetsmotor;
             
             ```
         """.trimIndent(),
@@ -79,7 +77,6 @@ class GraphTest {
             toi-oppfolgingsinformasjon --> toi-identmapper;
             toi-oppfolgingsperiode --> toi-sammenstille-kandidat;
             toi-sammenstille-kandidat --> toi-synlighetsmotor;
-            toi-synlighetsmotor;
             
             linkStyle 2 stroke:red;
             ```
@@ -98,7 +95,6 @@ class GraphTest {
             toi-oppfolgingsinformasjon --> toi-identmapper;
             toi-oppfolgingsperiode --> toi-sammenstille-kandidat;
             toi-sammenstille-kandidat --> toi-synlighetsmotor;
-            toi-synlighetsmotor;
             
             linkStyle 0 stroke:red;
             linkStyle 4 stroke:red;
@@ -118,7 +114,6 @@ class GraphTest {
             toi-oppfolgingsinformasjon --> toi-identmapper;
             toi-oppfolgingsperiode --> toi-sammenstille-kandidat;
             toi-sammenstille-kandidat --> toi-synlighetsmotor;
-            toi-synlighetsmotor;
             
             linkStyle 3 stroke:red;
             linkStyle 4 stroke:red;
@@ -138,7 +133,6 @@ class GraphTest {
             toi-oppfolgingsinformasjon --> toi-identmapper;
             toi-oppfolgingsperiode --> toi-sammenstille-kandidat;
             toi-sammenstille-kandidat --> toi-synlighetsmotor;
-            toi-synlighetsmotor;
             
             linkStyle 1 stroke:red;
             linkStyle 2 stroke:red;

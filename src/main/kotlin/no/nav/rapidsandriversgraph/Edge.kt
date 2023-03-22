@@ -1,37 +1,17 @@
 package no.nav.rapidsandriversgraph
 
 
-sealed interface Edge: Comparable<Edge> {
-    fun isEdgeOf(annenNode: Pair<String, String>): Boolean
-    fun addEventName(eventName: String)
-    fun toMermaidInstruction(): String
-}
-
-class ExistingEdge(private val startNode: String, private val endNode: String, eventNames: List<String>): Edge {
+class Edge(private val startNode: Node, private val endNode: Node, eventNames: List<String>): Comparable<Edge> {
     private val eventNames = eventNames.toMutableList()
-    override fun isEdgeOf(annenNode: Pair<String, String>) = startNode == annenNode.first && endNode == annenNode.second
-    override fun addEventName(eventName: String) {
+    fun isEdgeOf(annenNode: Pair<Node, Node>) = startNode == annenNode.first && endNode == annenNode.second
+    fun addEventName(eventName: String) {
         eventNames+=eventName
     }
 
-    override fun toMermaidInstruction() = "$startNode --> $endNode;"
+    fun toMermaidInstruction() = "$startNode --> $endNode;"
 
-    override fun compareTo(other: Edge) = when(other) {
-        is ExistingEdge->this.startNode.compareTo(other.startNode)
-        is NoEdges-> -1
+    override fun compareTo(other: Edge) = startNode.compareTo(other.startNode).let {
+        if(it!=0) it else endNode.compareTo(other.endNode)
     }
-}
-
-class NoEdges(private val name: String) : Edge {
-    override fun isEdgeOf(annenNode: Pair<String, String>) = false
-    override fun addEventName(eventName: String) {
-        throw IllegalStateException()
-    }
-
-    override fun toMermaidInstruction() = "$name;"
-
-    override fun compareTo(other: Edge) = when(other) {
-        is ExistingEdge-> 1
-        is NoEdges-> name.compareTo(other.name)
-    }
+    fun hasNode(node: Node) = startNode == node || endNode == node
 }

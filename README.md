@@ -49,12 +49,8 @@ Noder og kanter som viser en oversikt over eventer mellom applikasjoner
 ### Node
 Node-representasjon av en rapid-service. 
 #### Edge
-Edge-representasjon av koblingen mellom rapid-servicer.
+Edge-representasjon av hendelseskjede-element mellom to rapid-servicer
 Brukes inne i node for å vise hva som er neste node den peker på.
-##### ExistingEdge
-Edge-representasjon av en hendelseskjede-element mellom to rapid-servicer
-##### NoEdges
-Edge-representasjon av en manglende kobling fra en node
 
 ## Hendelse
 ### EventName
