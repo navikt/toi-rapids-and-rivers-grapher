@@ -13,10 +13,10 @@ class UgyldigHendelse(e: Exception) : Hendelse {
     override fun systemKart(): Set<Node> = emptySet()
 }
 
-class GyldigHendelse private constructor(private val eventName: String, private val besøkteServicer: List<String>): Hendelse {
+class GyldigHendelse private constructor(private val eventName: String, private val besøkteRapidServicer: List<String>): Hendelse {
     override fun systemKart(): Set<Node> {
-        val noder = besøkteServicer.indices.map { Node.fra(besøkteServicer[it])}
-        (0 until besøkteServicer.size-1).forEach { noder[it].addPathTo(noder[it+1], eventName) }
+        val noder = besøkteRapidServicer.indices.map { Node.fra(besøkteRapidServicer[it])}
+        (0 until besøkteRapidServicer.size-1).forEach { noder[it].addEdgeTo(noder[it+1], eventName) }
         return noder.toSet()
     }
 

@@ -40,14 +40,22 @@ toi-veileder --> toi-sammenstille-kandidat;
 
 # Definisjoner 
 
-## Service
-### besøkteServicer
+## RapidService
+En applikasjon som leser/skriver hendelser på rapid
+### besøkteRapidServicer
+Applikasjonenene hendelse har gått gjennom
 
-## Node
-### Path
-### Edge
-#### ExistingEdge
-#### NoEdges
+## Grapher
+### Systemkart
+### Node
+Node-representasjon av en rapid-service. 
+#### Edge
+Edge-representasjon av koblingen mellom rapid-servicer.
+Brukes inne i node for å vise hva som er neste node den peker på.
+##### ExistingEdge
+Edge-representasjon av en hendelseskjede-element mellom to rapid-servicer
+##### NoEdges
+Edge-representasjon av en manglende kobling fra en node
 
 ## Hendelse
 ### EventName
