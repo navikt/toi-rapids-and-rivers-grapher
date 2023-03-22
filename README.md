@@ -41,7 +41,7 @@ toi-veileder --> toi-sammenstille-kandidat;
 # Definisjoner 
 
 ## RapidService
-En applikasjon som leser/skriver hendelser på rapid
+En applikasjon som leser/skriver eventer på rapid
 
 ## Graph
 Noder og kanter som viser en oversikt over eventer mellom applikasjoner
@@ -49,17 +49,16 @@ Noder og kanter som viser en oversikt over eventer mellom applikasjoner
 ### Node
 Node-representasjon av en rapid-service. 
 #### Edge
-Edge-representasjon av hendelseskjede-element mellom to rapid-servicer
+Edge-representasjon av event som går  mellom to rapid-servicer
 Brukes inne i node for å vise hva som er neste node den peker på.
 
-## Hendelse
-### EventName
-### UgyldigHendelse
-### GyldigHendelse
+## Event
+Melding fra rapid
 
-## Mermaid
-### MermaidGraph
-### MermaidInstruction
-### MermaidGraphPerEvent
+## MermaidGraph
+Visualisering av mermaid-grafer basert på tekstedefinisjoner som kan tolkes i markup
+
+### MermaidTextDefinition
+En linje i MermaidGraph
 
 

@@ -1,6 +1,5 @@
 package no.nav.rapidsandriversgraph
 
-import no.nav.rapidsandriversgraph.GyldigHendelse.Companion.tilHendelse
 import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
@@ -8,12 +7,12 @@ import org.junit.jupiter.api.Test
 
 class GraphTest {
 
-    fun lagTestGraph(hendelser: List<String> = hendelser()): Graph {
+    fun lagTestGraph(events: List<String> = events()): Graph {
         val graph = Graph()
 
-        hendelser.map {
-            ConsumerRecord("test", 0, 0, "", it).tilHendelse()
-        }.forEach(graph::lesInnHendelse)
+        events.map {
+            ConsumerRecord("test", 0, 0, "", it).tilEvent()
+        }.forEach(graph::lesInnEvent)
         return graph
     }
 
@@ -143,14 +142,14 @@ class GraphTest {
     }
 
     @Test
-    fun ignorererUglydigeHendelser() {
+    fun ignorererInvalidEvents() {
         assertEquals(
             """
             ```mermaid
             graph TD;
             
             ```
-        """.trimIndent(), lagTestGraph(listOf(ugyldigJsonHendelse)).tilMermaidGraph()
+        """.trimIndent(), lagTestGraph(listOf(invalidJsonEvent)).tilMermaidGraph()
         )
         assertEquals(
             """
@@ -159,12 +158,12 @@ class GraphTest {
             
             ```
         """.trimIndent(),
-            lagTestGraph(listOf(ugyldigSystemParticipatingServicesHendelse)).tilMermaidGraph()
+            lagTestGraph(listOf(invalidSystemParticipatingServicesEvent)).tilMermaidGraph()
         )
     }
 }
 
-fun hendelser() = listOf(
+fun events() = listOf(
     """
         {
           "@event_name": "kandidat.cv-delt-med-arbeidsgiver-via-rekrutteringsbistand",
@@ -566,7 +565,7 @@ fun hendelser() = listOf(
     """.trimIndent()
 )
 
-private val ugyldigJsonHendelse = """
+private val invalidJsonEvent = """
         {
           "fodselsnummer": "07067106126",
           "oppfølgingsinformasjon": {
@@ -610,7 +609,7 @@ private val ugyldigJsonHendelse = """
           "aktørId": "2688175577173",
         }
 """.trimIndent()
-private val ugyldigSystemParticipatingServicesHendelse = """
+private val invalidSystemParticipatingServicesEvent = """
         {
           "fodselsnummer": "07067106126",
           "oppfølgingsinformasjon": {

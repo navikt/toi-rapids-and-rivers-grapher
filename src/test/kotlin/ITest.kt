@@ -21,7 +21,7 @@ class ITest {
         val mermaids = mutableListOf<String>()
         val mermaidSpy: (String) -> Unit = {mermaids.add(it)}
         val producer = KafkaProducer<String,String>(producerProperties())
-        hendelser().forEach { producer.send(ProducerRecord(topic, it)) }
+        events().forEach { producer.send(ProducerRecord(topic, it)) }
         sleep(1000)
         startApplication(mermaidSpy, mapOf(
             "KAFKA_BROKERS" to kafkaContainer.bootstrapServers

@@ -11,7 +11,7 @@ class Node private constructor(private val navn: String): Comparable<Node> {
         else edge.addEventName(eventName)
     }
 
-    fun toMermaidInstruction() = "$navn;"
+    fun toMermaidTextDefinition() = "$navn;"
     override fun toString() = navn
 
     companion object {

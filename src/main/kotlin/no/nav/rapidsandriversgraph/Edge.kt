@@ -8,7 +8,7 @@ class Edge(private val startNode: Node, private val endNode: Node, eventNames: L
         eventNames+=eventName
     }
 
-    fun toMermaidInstruction() = "$startNode --> $endNode;"
+    fun toMermaidTextDefinition() = "$startNode --> $endNode;"
 
     override fun compareTo(other: Edge) = startNode.compareTo(other.startNode).let {
         if(it!=0) it else endNode.compareTo(other.endNode)

@@ -1,9 +1,7 @@
 package no.nav.rapidsandriversgraph
 
-import no.nav.rapidsandriversgraph.GyldigHendelse.Companion.tilHendelse
 import org.apache.kafka.clients.CommonClientConfigs
 import org.apache.kafka.clients.consumer.ConsumerConfig
-import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.apache.kafka.clients.consumer.KafkaConsumer
 import org.apache.kafka.common.TopicPartition
 import org.apache.kafka.common.config.SslConfigs
@@ -26,8 +24,8 @@ fun startApplication(mermaidWriter: (String) -> Unit, envs: Map<String, String>)
     while (lesTilOffset>consumer.position(topics[0])) {
         log.info("Posisjonen er: ${consumer.position(topics[0])}")
         consumer.poll(Duration.ofSeconds(1))
-            .map {it.tilHendelse()}
-            .forEach(graph::lesInnHendelse)
+            .map {it.tilEvent()}
+            .forEach(graph::lesInnEvent)
     }
     mermaidWriter(graph.tilMermaidGraph())
 }

@@ -2,26 +2,26 @@ package no.nav.rapidsandriversgraph
 
 class Graph {
     private var nodes = setOf<Node>()
-    fun lesInnHendelse(hendelse: Hendelse) {
-        nodes = nodes `merge med` hendelse.toNodes()
+    fun lesInnEvent(event: Event) {
+        nodes = nodes `merge med` event.toNodes()
     }
 
-    fun tilMermaidGraph() = (nodeMermaidInstructions() + edgeMermaidInstructions())
+    fun tilMermaidGraph() = (nodeMermaidTextDefinition() + edgeMermaidTextDefinition())
         .joinToString(
             separator = "\n",
             prefix = "```mermaid\ngraph TD;\n",
             postfix = "\n```"
         )
 
-    private fun edgeMermaidInstructions() = nodes
+    private fun edgeMermaidTextDefinition() = nodes
         .flatMap(Node::edges)
         .toSortedSet()
-        .map(Edge::toMermaidInstruction)
+        .map(Edge::toMermaidTextDefinition)
 
-    private fun nodeMermaidInstructions() = nodes
+    private fun nodeMermaidTextDefinition() = nodes
         .filterNot(this::hasEdge)
         .toSortedSet()
-        .map(Node::toMermaidInstruction)
+        .map(Node::toMermaidTextDefinition)
 
     private fun hasEdge(node: Node) = nodes
         .flatMap(Node::edges)
