@@ -1,13 +1,13 @@
-package no.nav.rapidsandriversgrapher
+package no.nav.rapidsandriversgraf
 
-import no.nav.rapidsandriversgrapher.GyldigHendelse.Companion.tilHendelse
+import no.nav.rapidsandriversgraf.GyldigHendelse.Companion.tilHendelse
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 
-class GraphTest {
+class GrafTest {
     @Test
-    fun byggGraph() {
+    fun byggGraf() {
         assertEquals("""
             ```mermaid
             graph TD;
@@ -19,12 +19,12 @@ class GraphTest {
             toi-sammenstille-kandidat --> toi-synlighetsmotor;
             toi-synlighetsmotor;
             ```
-        """.trimIndent(), Grapher().apply { hendelser.map { it.tilHendelse() }.forEach(::lesInnHendelse) }
-            .tilMermaidGraph())
+        """.trimIndent(), Graf().apply { hendelser.map { it.tilHendelse() }.forEach(::lesInnHendelse) }
+            .tilMermaidGraf())
     }
 
     @Test
-    fun byggGraphForEventUtenEdges() {
+    fun byggGrafForEventUtenEdges() {
         TODO("Kanskje vi bare kan droppe denne testen? Trenger vi å synliggjøre eventer uten edger, eller er det " +
                 "kanskje nyttig å synliggjøre? Lage trello-oppgave på?")
         assertEquals("""
@@ -39,14 +39,14 @@ class GraphTest {
             toi-synlighetsmotor;
             
             ```
-        """.trimIndent(), Grapher().apply { hendelser.map { it.tilHendelse() }.forEach(::lesInnHendelse) }
-            .tilMermaidGraphPerEvent()["kandidat.cv-delt-med-arbeidsgiver-via-rekrutteringsbistand"])
+        """.trimIndent(), Graf().apply { hendelser.map { it.tilHendelse() }.forEach(::lesInnHendelse) }
+            .tilMermaidGrafPerEvent()["kandidat.cv-delt-med-arbeidsgiver-via-rekrutteringsbistand"])
     }
 
     @Test
-    fun byggGrapherPerEvent() {
-        val mermaidGraphPerEvent = Grapher().apply { hendelser.map { it.tilHendelse() }.forEach(::lesInnHendelse) }
-            .tilMermaidGraphPerEvent()
+    fun byggGrafPerPerEvent() {
+        val mermaidGrafPerEvent = Graf().apply { hendelser.map { it.tilHendelse() }.forEach(::lesInnHendelse) }
+            .tilMermaidGrafPerEvent()
         assertEquals("""
             ```mermaid
             ---
@@ -63,7 +63,7 @@ class GraphTest {
             
             linkStyle 2 stroke:red;
             ```
-        """.trimIndent(), mermaidGraphPerEvent["oppfølgingsinformasjon"])
+        """.trimIndent(), mermaidGrafPerEvent["oppfølgingsinformasjon"])
         assertEquals("""
             ```mermaid
             ---
@@ -81,7 +81,7 @@ class GraphTest {
             linkStyle 0 stroke:red;
             linkStyle 4 stroke:red;
             ```
-        """.trimIndent(), mermaidGraphPerEvent["arbeidsmarked-cv.sammenstilt"])
+        """.trimIndent(), mermaidGrafPerEvent["arbeidsmarked-cv.sammenstilt"])
         assertEquals("""
             ```mermaid
             ---
@@ -99,7 +99,7 @@ class GraphTest {
             linkStyle 3 stroke:red;
             linkStyle 4 stroke:red;
             ```
-        """.trimIndent(), mermaidGraphPerEvent["oppfølgingsperiode.sammenstilt"])
+        """.trimIndent(), mermaidGrafPerEvent["oppfølgingsperiode.sammenstilt"])
         assertEquals("""
             ```mermaid
             ---
@@ -118,7 +118,7 @@ class GraphTest {
             linkStyle 2 stroke:red;
             linkStyle 4 stroke:red;
             ```
-        """.trimIndent(), mermaidGraphPerEvent["oppfølgingsinformasjon.sammenstilt"])
+        """.trimIndent(), mermaidGrafPerEvent["oppfølgingsinformasjon.sammenstilt"])
     }
 
     @Test
@@ -128,13 +128,13 @@ class GraphTest {
             graph TD;
             
             ```
-        """.trimIndent(), Grapher().apply { lesInnHendelse(ugyldigJsonHendelse.tilHendelse()) }.tilMermaidGraph())
+        """.trimIndent(), Graf().apply { lesInnHendelse(ugyldigJsonHendelse.tilHendelse()) }.tilMermaidGraf())
         assertEquals("""
             ```mermaid
             graph TD;
             
             ```
-        """.trimIndent(), Grapher().apply { lesInnHendelse(ugyldigSystemParticipatingServicesHendelse.tilHendelse()) }.tilMermaidGraph())
+        """.trimIndent(), Graf().apply { lesInnHendelse(ugyldigSystemParticipatingServicesHendelse.tilHendelse()) }.tilMermaidGraf())
     }
 }
 /*

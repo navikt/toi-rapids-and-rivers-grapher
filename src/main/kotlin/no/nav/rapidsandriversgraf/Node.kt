@@ -1,4 +1,4 @@
-package no.nav.rapidsandriversgrapher
+package no.nav.rapidsandriversgraf
 
 class Node private constructor(private val navn: String) {
     private val edges = mutableListOf<Edge>()

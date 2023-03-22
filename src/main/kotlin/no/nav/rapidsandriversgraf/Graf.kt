@@ -1,12 +1,12 @@
-package no.nav.rapidsandriversgrapher
+package no.nav.rapidsandriversgraf
 
-class Grapher {
+class Graf {
     private var systemKart = setOf<Node>()
     fun lesInnHendelse(hendelse: Hendelse) {
         systemKart = systemKart `merge med` hendelse.systemKart()
     }
 
-    fun tilMermaidGraph() =
+    fun tilMermaidGraf() =
             systemKart
                 .flatMap(Node::toEdges)
                 .map(Edge::toMermaidInstruction)
@@ -16,7 +16,7 @@ class Grapher {
                     prefix = "```mermaid\ngraph TD;\n",
                     postfix = "\n```")
 
-    fun tilMermaidGraphPerEvent(): Map<String, String> {
+    fun tilMermaidGrafPerEvent(): Map<String, String> {
         TODO("Not yet implemented")
     }
 }

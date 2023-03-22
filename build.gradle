@@ -12,7 +12,7 @@ repositories {
 }
 
 application {
-    mainClass = "no.nav.rapidsandriversgrapher.ApplicationKt"
+    mainClass = "no.nav.rapidsandriversgrafer.ApplicationKt"
 }
 
 test {
