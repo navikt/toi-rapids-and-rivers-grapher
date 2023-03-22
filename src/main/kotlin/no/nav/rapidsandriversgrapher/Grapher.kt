@@ -2,7 +2,7 @@ package no.nav.rapidsandriversgrapher
 
 class Grapher {
     private var systemKart = setOf<Node>()
-    fun lesHendelse(hendelse: Hendelse) {
+    fun lesInnHendelse(hendelse: Hendelse) {
         systemKart = systemKart `merge med` hendelse.systemKart()
     }
 

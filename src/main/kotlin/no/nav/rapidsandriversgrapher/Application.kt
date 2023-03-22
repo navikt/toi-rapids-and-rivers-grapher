@@ -28,7 +28,7 @@ fun startApplication(mermaidWriter: (String) -> Unit, envs: Map<String, String>)
         consumer.poll(Duration.ofSeconds(1))
             .map(ConsumerRecord<String, String>::value)
             .map {it.tilHendelse()}
-            .forEach(grapher::lesHendelse)
+            .forEach(grapher::lesInnHendelse)
     }
     mermaidWriter(grapher.tilMermaidGraph())
 }

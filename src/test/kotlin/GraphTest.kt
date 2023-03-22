@@ -19,7 +19,7 @@ class GraphTest {
             toi-sammenstille-kandidat --> toi-synlighetsmotor;
             toi-synlighetsmotor;
             ```
-        """.trimIndent(), Grapher().apply { hendelser.map { it.tilHendelse() }.forEach(::lesHendelse) }
+        """.trimIndent(), Grapher().apply { hendelser.map { it.tilHendelse() }.forEach(::lesInnHendelse) }
             .tilMermaidGraph())
     }
 
@@ -39,13 +39,13 @@ class GraphTest {
             toi-synlighetsmotor;
             
             ```
-        """.trimIndent(), Grapher().apply { hendelser.map { it.tilHendelse() }.forEach(::lesHendelse) }
+        """.trimIndent(), Grapher().apply { hendelser.map { it.tilHendelse() }.forEach(::lesInnHendelse) }
             .tilMermaidGraphPerEvent()["kandidat.cv-delt-med-arbeidsgiver-via-rekrutteringsbistand"])
     }
 
     @Test
     fun byggGrapherPerEvent() {
-        val mermaidGraphPerEvent = Grapher().apply { hendelser.map { it.tilHendelse() }.forEach(::lesHendelse) }
+        val mermaidGraphPerEvent = Grapher().apply { hendelser.map { it.tilHendelse() }.forEach(::lesInnHendelse) }
             .tilMermaidGraphPerEvent()
         assertEquals("""
             ```mermaid
@@ -128,13 +128,13 @@ class GraphTest {
             graph TD;
             
             ```
-        """.trimIndent(), Grapher().apply { lesHendelse(ugyldigJsonHendelse.tilHendelse()) }.tilMermaidGraph())
+        """.trimIndent(), Grapher().apply { lesInnHendelse(ugyldigJsonHendelse.tilHendelse()) }.tilMermaidGraph())
         assertEquals("""
             ```mermaid
             graph TD;
             
             ```
-        """.trimIndent(), Grapher().apply { lesHendelse(ugyldigSystemParticipatingServicesHendelse.tilHendelse()) }.tilMermaidGraph())
+        """.trimIndent(), Grapher().apply { lesInnHendelse(ugyldigSystemParticipatingServicesHendelse.tilHendelse()) }.tilMermaidGraph())
     }
 }
 /*
