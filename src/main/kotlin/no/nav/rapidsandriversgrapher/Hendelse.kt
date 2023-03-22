@@ -16,7 +16,7 @@ class UgyldigHendelse(e: Exception) : Hendelse {
 class GyldigHendelse private constructor(private val eventName: String, private val besøkteServicer: List<String>): Hendelse {
     override fun systemKart(): Set<Node> {
         val noder = besøkteServicer.indices.map { Node.fra(besøkteServicer[it])}
-        (0 until besøkteServicer.size-1).forEach { noder[it].pathTo(noder[it+1], eventName) }
+        (0 until besøkteServicer.size-1).forEach { noder[it].addPathTo(noder[it+1], eventName) }
         return noder.toSet()
     }
 

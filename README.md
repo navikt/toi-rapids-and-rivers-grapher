@@ -35,3 +35,31 @@ toi-synlighetsmotor --> toi-kandidatfeed;
 toi-tilretteleggingsbehov --> toi-sammenstille-kandidat;
 toi-veileder --> toi-sammenstille-kandidat;
 ```
+
+
+
+# Definisjoner 
+
+## Service
+### besøkteServicer
+
+## Node
+### Path
+### Edge
+#### ExistingEdge
+#### NoEdges
+
+## Hendelse
+### EventName
+### UgyldigHendelse
+### GyldigHendelse
+
+## Grapher
+### Systemkart
+
+## Mermaid
+### MermaidGraph
+### MermaidInstruction
+### MermaidGraphPerEvent
+
+
