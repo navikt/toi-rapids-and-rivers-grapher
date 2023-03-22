@@ -23,5 +23,3 @@ class Node private constructor(private val navn: String): Comparable<Node> {
 }
 
 private typealias RapidServiceNavn = String
-
-infix fun Set<Node>.`merge med`(other: Set<Node>): Set<Node> = this + other

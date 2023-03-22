@@ -6,8 +6,8 @@ class Graph {
     private var eventNames = setOf<String>()
 
     fun lesInnEvent(event: Event) {
-        nodes = nodes `merge med` event.toNodes()
-        eventNames = eventNames + event.eventName
+        nodes = nodes + event.toNodes()
+        eventNames = event + eventNames
     }
 
     fun tilMermaidGraph() = (nodeMermaidTextDefinition() + edgeMermaidTextDefinition())
