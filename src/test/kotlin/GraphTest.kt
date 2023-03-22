@@ -1,14 +1,27 @@
 package no.nav.rapidsandriversgraph
 
 import no.nav.rapidsandriversgraph.GyldigHendelse.Companion.tilHendelse
+import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 
 class GraphTest {
+
+    fun lagTestGraph(hendelser: List<String> = hendelser()): Graph {
+        val graph = Graph()
+
+        hendelser.map {
+            ConsumerRecord("test", 0, 0, "", it).tilHendelse()
+        }.forEach(graph::lesInnHendelse)
+        return graph
+    }
+
     @Test
     fun byggGraph() {
-        assertEquals("""
+
+        assertEquals(
+            """
             ```mermaid
             graph TD;
             rekrutteringsbistand-stilling-api;
@@ -19,15 +32,19 @@ class GraphTest {
             toi-sammenstille-kandidat --> toi-synlighetsmotor;
             toi-synlighetsmotor;
             ```
-        """.trimIndent(), Graph().apply { hendelser.map { it.tilHendelse() }.forEach(::lesInnHendelse) }
-            .tilMermaidGraph())
+        """.trimIndent(),
+            lagTestGraph().tilMermaidGraph()
+        )
     }
 
     @Test
     fun byggGraphForEventUtenEdges() {
-        TODO("Kanskje vi bare kan droppe denne testen? Trenger vi å synliggjøre eventer uten edger, eller er det " +
-                "kanskje nyttig å synliggjøre? Lage trello-oppgave på?")
-        assertEquals("""
+        TODO(
+            "Kanskje vi bare kan droppe denne testen? Trenger vi å synliggjøre eventer uten edger, eller er det " +
+                    "kanskje nyttig å synliggjøre? Lage trello-oppgave på?"
+        )
+        assertEquals(
+            """
             ```mermaid
             graph TD;
             rekrutteringsbistand-stilling-api;
@@ -39,15 +56,18 @@ class GraphTest {
             toi-synlighetsmotor;
             
             ```
-        """.trimIndent(), Graph().apply { hendelser.map { it.tilHendelse() }.forEach(::lesInnHendelse) }
-            .tilMermaidGraphPerEvent()["kandidat.cv-delt-med-arbeidsgiver-via-rekrutteringsbistand"])
+        """.trimIndent(),
+            lagTestGraph()
+                .tilMermaidGraphPerEvent()["kandidat.cv-delt-med-arbeidsgiver-via-rekrutteringsbistand"]
+        )
     }
 
     @Test
     fun byggGraphPerPerEvent() {
-        val mermaidGraphPerEvent = Graph().apply { hendelser.map { it.tilHendelse() }.forEach(::lesInnHendelse) }
-            .tilMermaidGraphPerEvent()
-        assertEquals("""
+        val mermaidGraphPerEvent = lagTestGraph().tilMermaidGraphPerEvent()
+
+        assertEquals(
+            """
             ```mermaid
             ---
             title: oppfølgingsinformasjon
@@ -63,8 +83,10 @@ class GraphTest {
             
             linkStyle 2 stroke:red;
             ```
-        """.trimIndent(), mermaidGraphPerEvent["oppfølgingsinformasjon"])
-        assertEquals("""
+        """.trimIndent(), mermaidGraphPerEvent["oppfølgingsinformasjon"]
+        )
+        assertEquals(
+            """
             ```mermaid
             ---
             title: arbeidsmarked-cv.sammenstilt
@@ -81,8 +103,10 @@ class GraphTest {
             linkStyle 0 stroke:red;
             linkStyle 4 stroke:red;
             ```
-        """.trimIndent(), mermaidGraphPerEvent["arbeidsmarked-cv.sammenstilt"])
-        assertEquals("""
+        """.trimIndent(), mermaidGraphPerEvent["arbeidsmarked-cv.sammenstilt"]
+        )
+        assertEquals(
+            """
             ```mermaid
             ---
             title: oppfølgingsperiode.sammenstilt
@@ -99,8 +123,10 @@ class GraphTest {
             linkStyle 3 stroke:red;
             linkStyle 4 stroke:red;
             ```
-        """.trimIndent(), mermaidGraphPerEvent["oppfølgingsperiode.sammenstilt"])
-        assertEquals("""
+        """.trimIndent(), mermaidGraphPerEvent["oppfølgingsperiode.sammenstilt"]
+        )
+        assertEquals(
+            """
             ```mermaid
             ---
             title: oppfølgingsinformasjon.sammenstilt
@@ -118,45 +144,33 @@ class GraphTest {
             linkStyle 2 stroke:red;
             linkStyle 4 stroke:red;
             ```
-        """.trimIndent(), mermaidGraphPerEvent["oppfølgingsinformasjon.sammenstilt"])
+        """.trimIndent(), mermaidGraphPerEvent["oppfølgingsinformasjon.sammenstilt"]
+        )
     }
 
     @Test
     fun ignorererUglydigeHendelser() {
-        assertEquals("""
+        assertEquals(
+            """
             ```mermaid
             graph TD;
             
             ```
-        """.trimIndent(), Graph().apply { lesInnHendelse(ugyldigJsonHendelse.tilHendelse()) }.tilMermaidGraph())
-        assertEquals("""
+        """.trimIndent(), lagTestGraph(listOf(ugyldigJsonHendelse)).tilMermaidGraph()
+        )
+        assertEquals(
+            """
             ```mermaid
             graph TD;
             
             ```
-        """.trimIndent(), Graph().apply { lesInnHendelse(ugyldigSystemParticipatingServicesHendelse.tilHendelse()) }.tilMermaidGraph())
+        """.trimIndent(),
+            lagTestGraph(listOf(ugyldigSystemParticipatingServicesHendelse)).tilMermaidGraph()
+        )
     }
 }
-/*
-kandidat.cv-delt-med-arbeidsgiver-via-rekrutteringsbistand
-kandidat.cv-delt-med-arbeidsgiver-via-rekrutteringsbistand
-oppfølgingsinformasjon
-arbeidsmarked-cv.sammenstilt
-oppfølgingsperiode.sammenstilt
-oppfølgingsinformasjon
-oppfølgingsinformasjon.sammenstilt
-oppfølgingsinformasjon
-oppfølgingsinformasjon
 
-----
-
-kandidat.cv-delt-med-arbeidsgiver-via-rekrutteringsbistand
-oppfølgingsinformasjon
-arbeidsmarked-cv.sammenstilt
-oppfølgingsperiode.sammenstilt
-oppfølgingsinformasjon.sammenstilt
- */
-val hendelser = listOf(
+fun hendelser() = listOf(
     """
         {
           "@event_name": "kandidat.cv-delt-med-arbeidsgiver-via-rekrutteringsbistand",
@@ -637,3 +651,4 @@ private val ugyldigSystemParticipatingServicesHendelse = """
           "aktørId": "2688175577173"
         }
 """.trimIndent()
+

@@ -26,7 +26,6 @@ fun startApplication(mermaidWriter: (String) -> Unit, envs: Map<String, String>)
     while (lesTilOffset>consumer.position(topics[0])) {
         log.info("Posisjonen er: ${consumer.position(topics[0])}")
         consumer.poll(Duration.ofSeconds(1))
-            .map(ConsumerRecord<String, String>::value)
             .map {it.tilHendelse()}
             .forEach(graph::lesInnHendelse)
     }

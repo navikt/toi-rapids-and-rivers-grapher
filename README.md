@@ -42,12 +42,9 @@ toi-veileder --> toi-sammenstille-kandidat;
 
 ## RapidService
 En applikasjon som leser/skriver hendelser på rapid
-### besøkteRapidServicer
-Applikasjonenene hendelse har gått gjennom
 
 ## Graph
 Noder og kanter som viser en oversikt over eventer mellom applikasjoner
-### Systemkart
 
 ### Node
 Node-representasjon av en rapid-service. 

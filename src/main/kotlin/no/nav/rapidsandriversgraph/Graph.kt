@@ -1,13 +1,13 @@
 package no.nav.rapidsandriversgraph
 
 class Graph {
-    private var systemKart = setOf<Node>()
+    private var nodes = setOf<Node>()
     fun lesInnHendelse(hendelse: Hendelse) {
-        systemKart = systemKart `merge med` hendelse.systemKart()
+        nodes = nodes `merge med` hendelse.toNodes()
     }
 
     fun tilMermaidGraph() =
-            systemKart
+            nodes
                 .flatMap(Node::toEdges)
                 .map(Edge::toMermaidInstruction)
                 .toSortedSet()

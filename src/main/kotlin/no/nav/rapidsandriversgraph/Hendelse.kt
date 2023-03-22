@@ -1,28 +1,29 @@
 package no.nav.rapidsandriversgraph
 
 import kotlinx.serialization.json.*
+import org.apache.kafka.clients.consumer.ConsumerRecord
 
 interface Hendelse {
-    fun systemKart(): Set<Node>
+    fun toNodes(): Set<Node>
 }
 
 class UgyldigHendelse(e: Exception) : Hendelse {
     init {
         log.warn("ignorerer hendelse som kaster feilmelding ved parsing", e)
     }
-    override fun systemKart(): Set<Node> = emptySet()
+    override fun toNodes(): Set<Node> = emptySet()
 }
 
 class GyldigHendelse private constructor(private val eventName: String, private val besøkteRapidServicer: List<String>): Hendelse {
-    override fun systemKart(): Set<Node> {
+    override fun toNodes(): Set<Node> {
         val noder = besøkteRapidServicer.indices.map { Node.fra(besøkteRapidServicer[it])}
         (0 until besøkteRapidServicer.size-1).forEach { noder[it].addEdgeTo(noder[it+1], eventName) }
         return noder.toSet()
     }
 
     companion object {
-        fun String.tilHendelse() = try {
-            GyldigHendelse(parseEventName(), parseBesøkteServicer())
+        fun ConsumerRecord<String, String>.tilHendelse() = try {
+            GyldigHendelse(value().parseEventName(), value().parseBesøkteServicer())
         } catch (e: Exception) {
             UgyldigHendelse(e)
         }
