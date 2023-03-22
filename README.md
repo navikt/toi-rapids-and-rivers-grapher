@@ -1,5 +1,5 @@
-# Autogenerer graf for trafikken på toi-rapiden
-Denne applikasjonen kjører hver midnatt og logger en mermaid-graf som viser hvordan applikasjonene på rapiden prater sammen:
+# Autogenerer graph for trafikken på toi-rapiden
+Denne applikasjonen kjører hver midnatt og logger en mermaid-graph som viser hvordan applikasjonene på rapiden prater sammen:
 
 Oppdatert 2023-03-14
 ```mermaid
@@ -45,9 +45,10 @@ En applikasjon som leser/skriver hendelser på rapid
 ### besøkteRapidServicer
 Applikasjonenene hendelse har gått gjennom
 
-## Graf
-
+## Graph
+Noder og kanter som viser en oversikt over eventer mellom applikasjoner
 ### Systemkart
+
 ### Node
 Node-representasjon av en rapid-service. 
 #### Edge
@@ -63,12 +64,9 @@ Edge-representasjon av en manglende kobling fra en node
 ### UgyldigHendelse
 ### GyldigHendelse
 
-## Graf
-### Systemkart
-
 ## Mermaid
-### MermaidGraf
+### MermaidGraph
 ### MermaidInstruction
-### MermaidGrafPerEvent
+### MermaidGraphPerEvent
 
 

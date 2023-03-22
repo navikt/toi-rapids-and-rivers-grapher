@@ -1,4 +1,4 @@
-package no.nav.rapidsandriversgraf
+package no.nav.rapidsandriversgraph
 
 
 sealed interface Edge: Comparable<Edge> {

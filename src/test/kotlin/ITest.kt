@@ -1,4 +1,4 @@
-package no.nav.rapidsandriversgraf
+package no.nav.rapidsandriversgraph
 
 import org.apache.kafka.clients.CommonClientConfigs
 import org.apache.kafka.clients.producer.KafkaProducer

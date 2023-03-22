@@ -1,6 +1,6 @@
-package no.nav.rapidsandriversgraf
+package no.nav.rapidsandriversgraph
 
-import no.nav.rapidsandriversgraf.GyldigHendelse.Companion.tilHendelse
+import no.nav.rapidsandriversgraph.GyldigHendelse.Companion.tilHendelse
 import org.apache.kafka.clients.CommonClientConfigs
 import org.apache.kafka.clients.consumer.ConsumerConfig
 import org.apache.kafka.clients.consumer.ConsumerRecord
@@ -12,7 +12,7 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.time.Duration
 
-val log: Logger = LoggerFactory.getLogger("no.nav.rapidsandriversgrafer")
+val log: Logger = LoggerFactory.getLogger("no.nav.rapidsandriversgraph")
 
 fun startApplication(mermaidWriter: (String) -> Unit, envs: Map<String, String>) {
     val consumer = KafkaConsumer<String,String>(consumerConfig(envs))
@@ -22,15 +22,15 @@ fun startApplication(mermaidWriter: (String) -> Unit, envs: Map<String, String>)
     val lesTilOffset = consumer.position(topics[0])
     log.info("Topic ${topics[0]} er nå på posisjon: $lesTilOffset")
     consumer.seekToBeginning(topics)
-    val graf = Graf()
+    val graph = Graph()
     while (lesTilOffset>consumer.position(topics[0])) {
         log.info("Posisjonen er: ${consumer.position(topics[0])}")
         consumer.poll(Duration.ofSeconds(1))
             .map(ConsumerRecord<String, String>::value)
             .map {it.tilHendelse()}
-            .forEach(graf::lesInnHendelse)
+            .forEach(graph::lesInnHendelse)
     }
-    mermaidWriter(graf.tilMermaidGraf())
+    mermaidWriter(graph.tilMermaidGraph())
 }
 
 fun consumerConfig(envs: Map<String, String>) = mutableMapOf<String, Any>(

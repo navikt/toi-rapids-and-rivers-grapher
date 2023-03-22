@@ -1,4 +1,4 @@
-package no.nav.rapidsandriversgraf
+package no.nav.rapidsandriversgraph
 
 import kotlinx.serialization.json.*
 
