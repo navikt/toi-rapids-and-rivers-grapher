@@ -39,10 +39,8 @@ class ITest {
             toi-oppfolgingsperiode --> toi-sammenstille-kandidat;
             toi-sammenstille-kandidat --> toi-synlighetsmotor;
             ```
+            kandidat.cv-delt-med-arbeidsgiver-via-rekrutteringsbistand
             ```mermaid
-            ---
-            title: kandidat.cv-delt-med-arbeidsgiver-via-rekrutteringsbistand
-            ---
             graph TD;
             rekrutteringsbistand-stilling-api;
             toi-arbeidsmarked-cv --> toi-sammenstille-kandidat;
@@ -53,10 +51,8 @@ class ITest {
             
             
             ```
+            oppfølgingsinformasjon
             ```mermaid
-            ---
-            title: oppfølgingsinformasjon
-            ---
             graph TD;
             rekrutteringsbistand-stilling-api;
             toi-arbeidsmarked-cv --> toi-sammenstille-kandidat;
@@ -68,10 +64,8 @@ class ITest {
             linkStyle 2 stroke:red;
             classDef x stroke: red;
             ```
+            arbeidsmarked-cv.sammenstilt
             ```mermaid
-            ---
-            title: arbeidsmarked-cv.sammenstilt
-            ---
             graph TD;
             rekrutteringsbistand-stilling-api;
             toi-arbeidsmarked-cv:::x --> toi-sammenstille-kandidat:::x;
@@ -83,10 +77,8 @@ class ITest {
             linkStyle 0,4 stroke:red;
             classDef x stroke: red;
             ```
+            oppfølgingsperiode.sammenstilt
             ```mermaid
-            ---
-            title: oppfølgingsperiode.sammenstilt
-            ---
             graph TD;
             rekrutteringsbistand-stilling-api;
             toi-arbeidsmarked-cv --> toi-sammenstille-kandidat;
@@ -98,10 +90,8 @@ class ITest {
             linkStyle 3,4 stroke:red;
             classDef x stroke: red;
             ```
+            oppfølgingsinformasjon.sammenstilt
             ```mermaid
-            ---
-            title: oppfølgingsinformasjon.sammenstilt
-            ---
             graph TD;
             rekrutteringsbistand-stilling-api;
             toi-arbeidsmarked-cv --> toi-sammenstille-kandidat;

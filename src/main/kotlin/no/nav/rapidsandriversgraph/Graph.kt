@@ -44,7 +44,7 @@ class Graph {
             val start = (nodeMermaidTextDefinition() + edgeMermaidTextDefinition(eventName))
                 .joinToString(
                     separator = "\n",
-                    prefix = "```mermaid\n---\ntitle: $eventName\n---\ngraph TD;\n",
+                    prefix = "$eventName\n```mermaid\ngraph TD;\n",
                     postfix = ""
                 )
 

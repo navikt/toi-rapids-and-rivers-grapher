@@ -45,10 +45,8 @@ class GraphTest {
     fun byggGraphForEventUtenEdges() {
         assertEquals(
             """
+            kandidat.cv-delt-med-arbeidsgiver-via-rekrutteringsbistand
             ```mermaid
-            ---
-            title: kandidat.cv-delt-med-arbeidsgiver-via-rekrutteringsbistand
-            ---
             graph TD;
             rekrutteringsbistand-stilling-api;
             toi-arbeidsmarked-cv --> toi-sammenstille-kandidat;
@@ -71,10 +69,8 @@ class GraphTest {
 
         assertEquals(
             """
+            oppfølgingsinformasjon
             ```mermaid
-            ---
-            title: oppfølgingsinformasjon
-            ---
             graph TD;
             rekrutteringsbistand-stilling-api;
             toi-arbeidsmarked-cv --> toi-sammenstille-kandidat;
@@ -90,10 +86,8 @@ class GraphTest {
         )
         assertEquals(
             """
+            arbeidsmarked-cv.sammenstilt
             ```mermaid
-            ---
-            title: arbeidsmarked-cv.sammenstilt
-            ---
             graph TD;
             rekrutteringsbistand-stilling-api;
             toi-arbeidsmarked-cv:::x --> toi-sammenstille-kandidat:::x;
@@ -109,10 +103,8 @@ class GraphTest {
         )
         assertEquals(
             """
+            oppfølgingsperiode.sammenstilt
             ```mermaid
-            ---
-            title: oppfølgingsperiode.sammenstilt
-            ---
             graph TD;
             rekrutteringsbistand-stilling-api;
             toi-arbeidsmarked-cv --> toi-sammenstille-kandidat;
@@ -128,10 +120,8 @@ class GraphTest {
         )
         assertEquals(
             """
+            oppfølgingsinformasjon.sammenstilt
             ```mermaid
-            ---
-            title: oppfølgingsinformasjon.sammenstilt
-            ---
             graph TD;
             rekrutteringsbistand-stilling-api;
             toi-arbeidsmarked-cv --> toi-sammenstille-kandidat;
