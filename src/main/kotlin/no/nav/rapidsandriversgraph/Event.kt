@@ -3,9 +3,12 @@ package no.nav.rapidsandriversgraph
 import kotlinx.serialization.json.*
 import org.apache.kafka.clients.consumer.ConsumerRecord
 
+
 interface Event {
     fun toNodes(): Set<Node>
     operator fun plus(eventNames: Set<String>): Set<String>
+
+    fun skipEvent(): Boolean
 }
 
 class InvalidEvent(e: Exception) : Event {
@@ -15,6 +18,7 @@ class InvalidEvent(e: Exception) : Event {
 
     override fun toNodes(): Set<Node> = emptySet()
     override fun plus(eventNames: Set<String>) = eventNames
+    override fun skipEvent() = true
 }
 
 class ValidEvent(private val eventName: String, private val besøkteRapidServicer: List<String>) : Event {
@@ -25,6 +29,14 @@ class ValidEvent(private val eventName: String, private val besøkteRapidService
     }
 
     override fun plus(eventNames: Set<String>) = eventNames + eventName
+    override fun skipEvent(): Boolean =
+        eventName in setOf(
+            "application_down",
+            "application_stop",
+            "application_ready",
+            "application_not_ready",
+            "application_up",
+        )
 }
 
 private fun String.parseEventName(): String =

@@ -17,6 +17,10 @@ class Node private constructor(private val navn: String): Comparable<Node> {
     companion object {
         private val noder = mutableMapOf<RapidServiceNavn, Node>()
         fun fra(rapidServiceNavn: RapidServiceNavn) = noder.computeIfAbsent(rapidServiceNavn) { Node(rapidServiceNavn) }
+
+        fun clear() {
+            noder.clear()
+        }
     }
 
     override fun compareTo(other: Node) = navn.compareTo(other.navn)

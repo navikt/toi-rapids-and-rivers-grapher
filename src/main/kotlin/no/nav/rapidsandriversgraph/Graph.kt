@@ -6,11 +6,14 @@ class Graph {
     private var eventNames = setOf<String>()
 
     fun lesInnEvent(event: Event) {
-        nodes = nodes + event.toNodes()
-        eventNames = event + eventNames
+        if(!event.skipEvent()) {
+            nodes = nodes + event.toNodes()
+            eventNames = event + eventNames
+        }
     }
 
-    fun tilMermaidGraph() = (nodeMermaidTextDefinition() + edgeMermaidTextDefinition())
+    fun tilMermaidGraph() =
+        (nodeMermaidTextDefinition() + edgeMermaidTextDefinition())
         .joinToString(
             separator = "\n",
             prefix = "```mermaid\ngraph TD;\n",

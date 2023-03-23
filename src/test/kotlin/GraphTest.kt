@@ -1,11 +1,17 @@
 package no.nav.rapidsandriversgraph
 
 import org.apache.kafka.clients.consumer.ConsumerRecord
+import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 
 class GraphTest {
+
+    @AfterEach
+    fun afterEach() {
+        Node.clear()
+    }
 
     fun lagTestGraph(events: List<String> = events()): Graph {
         val graph = Graph()
@@ -159,6 +165,61 @@ class GraphTest {
             ```
         """.trimIndent(),
             lagTestGraph(listOf(invalidSystemParticipatingServicesEvent)).tilMermaidGraph()
+        )
+    }
+    @Test
+    fun ignorererEventerSomSkalSkippes() {
+        assertEquals(
+            """
+            ```mermaid
+            graph TD;
+            
+            ```
+        """.trimIndent(), lagTestGraph(listOf(dummyEvent("application_up"))).tilMermaidGraph()
+        )/*
+        assertEquals(
+            """
+            ```mermaid
+            graph TD;
+
+            ```
+        """.trimIndent(), lagTestGraph(listOf(dummyEvent("application_down"))).tilMermaidGraph()
+        )
+        assertEquals(
+            """
+            ```mermaid
+            graph TD;
+
+            ```
+        """.trimIndent(), lagTestGraph(listOf(dummyEvent("application_not_ready"))).tilMermaidGraph()
+        )
+        assertEquals(
+            """
+            ```mermaid
+            graph TD;
+
+            ```
+        """.trimIndent(), lagTestGraph(listOf(dummyEvent("application_ready"))).tilMermaidGraph()
+        )
+        assertEquals(
+            """
+            ```mermaid
+            graph TD;
+
+            ```
+        """.trimIndent(), lagTestGraph(listOf(dummyEvent("application_stop"))).tilMermaidGraph()
+        )*/
+    }
+
+    @Test
+    fun brukEventerSomIkkeSkalSkippes() {
+        assertEquals(
+            """
+            ```mermaid
+            graph TD;
+            toi-oppfolgingsinformasjon --> toi-identmapper;
+            ```
+        """.trimIndent(), lagTestGraph(listOf(dummyEvent("ikke_skip"))).tilMermaidGraph()
         )
     }
 }
@@ -641,6 +702,29 @@ private val invalidSystemParticipatingServicesEvent = """
               "instance": "toi-oppfolgingsinformasjon-59d48ccf8b-72nxv",
               "image": "ghcr.io/navikt/toi-rapids-and-rivers/toi-oppfolgingsinformasjon:333dd8d9c539a459adbb27470d7151656f9b1a90"
             },
+          "aktørId": "2688175577173"
+        }
+""".trimIndent()
+
+fun dummyEvent(eventName: String = "") = """
+        {
+          "@event_name": "$eventName",
+          "system_participating_services": [
+            {
+              "id": "ed539830-56ba-4363-8704-41a120ae5b9f",
+              "time": "2022-12-27T08:35:03.172578743",
+              "service": "toi-oppfolgingsinformasjon",
+              "instance": "toi-oppfolgingsinformasjon-59d48ccf8b-72nxv",
+              "image": "ghcr.io/navikt/toi-rapids-and-rivers/toi-oppfolgingsinformasjon:333dd8d9c539a459adbb27470d7151656f9b1a90"
+            },
+            {
+              "id": "ed539830-56ba-4363-8704-41a120ae5b9f",
+              "time": "2022-12-27T08:35:03.180677290",
+              "service": "toi-identmapper",
+              "instance": "toi-identmapper-9dd7454d7-r5r8x",
+              "image": "ghcr.io/navikt/toi-rapids-and-rivers/toi-identmapper:333dd8d9c539a459adbb27470d7151656f9b1a90"
+            }
+          ],
           "aktørId": "2688175577173"
         }
 """.trimIndent()
