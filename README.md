@@ -1,34 +1,42 @@
 # Autogenerer graph for trafikken på toi-rapiden
 Denne applikasjonen kjører hver midnatt og logger en mermaid-graph som viser hvordan applikasjonene på rapiden prater sammen:
 
-Oppdatert 2023-03-14
+Oppdatert 2023-03-23
 ```mermaid
 graph TD;
+toi-arbeidsgiver-notifikasjon;
+toi-helseapp;
+foresporsel-om-deling-av-cv-api --> foresporsel-om-deling-av-cv-api;
 foresporsel-om-deling-av-cv-api --> rekrutteringsbistand-stilling-api;
+presenterte-kandidater-api --> presenterte-kandidater-api;
 presenterte-kandidater-api --> rekrutteringsbistand-stilling-api;
 rekrutteringsbistand-kandidat-api --> foresporsel-om-deling-av-cv-api;
 rekrutteringsbistand-kandidat-api --> presenterte-kandidater-api;
 rekrutteringsbistand-kandidat-api --> rekrutteringsbistand-statistikk-api;
 rekrutteringsbistand-kandidat-api --> rekrutteringsbistand-stilling-api;
+rekrutteringsbistand-statistikk-api --> rekrutteringsbistand-statistikk-api;
 rekrutteringsbistand-statistikk-api --> rekrutteringsbistand-stilling-api;
 rekrutteringsbistand-statistikk-api --> toi-identmapper;
 rekrutteringsbistand-stilling-api --> foresporsel-om-deling-av-cv-api;
 rekrutteringsbistand-stilling-api --> presenterte-kandidater-api;
 rekrutteringsbistand-stilling-api --> rekrutteringsbistand-statistikk-api;
-toi-arbeidsgiver-notifikasjon;
+rekrutteringsbistand-stilling-api --> rekrutteringsbistand-stilling-api;
 toi-arbeidsmarked-cv --> toi-sammenstille-kandidat;
 toi-fritatt-kandidatsok --> toi-identmapper;
-toi-helseapp;
 toi-hjemmel --> toi-sammenstille-kandidat;
+toi-hull-i-cv --> toi-hull-i-cv;
 toi-hull-i-cv --> toi-ontologitjeneste;
 toi-identmapper --> rekrutteringsbistand-statistikk-api;
 toi-identmapper --> toi-sammenstille-kandidat;
+toi-kandidatfeed --> toi-kandidatfeed;
 toi-kandidatfeed --> toi-organisasjonsenhet;
 toi-maa-behandle-tidligere-cv --> toi-sammenstille-kandidat;
 toi-ontologitjeneste --> toi-kandidatfeed;
+toi-ontologitjeneste --> toi-ontologitjeneste;
 toi-oppfolgingsinformasjon --> toi-identmapper;
 toi-oppfolgingsperiode --> toi-sammenstille-kandidat;
 toi-organisasjonsenhet --> toi-hull-i-cv;
+toi-organisasjonsenhet --> toi-organisasjonsenhet;
 toi-sammenstille-kandidat --> toi-synlighetsmotor;
 toi-siste-14a-vedtak --> toi-sammenstille-kandidat;
 toi-synlighetsmotor --> toi-kandidatfeed;
