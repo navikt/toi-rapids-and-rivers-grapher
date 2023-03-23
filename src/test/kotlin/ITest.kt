@@ -80,8 +80,7 @@ class ITest {
             toi-oppfolgingsperiode --> toi-sammenstille-kandidat;
             toi-sammenstille-kandidat:::x --> toi-synlighetsmotor:::x;
             
-            linkStyle 0 stroke:red;
-            linkStyle 4 stroke:red;
+            linkStyle 0,4 stroke:red;
             classDef x stroke: red;
             ```
             ```mermaid
@@ -96,8 +95,7 @@ class ITest {
             toi-oppfolgingsperiode:::x --> toi-sammenstille-kandidat:::x;
             toi-sammenstille-kandidat:::x --> toi-synlighetsmotor:::x;
             
-            linkStyle 3 stroke:red;
-            linkStyle 4 stroke:red;
+            linkStyle 3,4 stroke:red;
             classDef x stroke: red;
             ```
             ```mermaid
@@ -112,9 +110,7 @@ class ITest {
             toi-oppfolgingsperiode --> toi-sammenstille-kandidat;
             toi-sammenstille-kandidat:::x --> toi-synlighetsmotor:::x;
             
-            linkStyle 1 stroke:red;
-            linkStyle 2 stroke:red;
-            linkStyle 4 stroke:red;
+            linkStyle 1,2,4 stroke:red;
             classDef x stroke: red;
             ```
         """.trimIndent(), mermaids.first())

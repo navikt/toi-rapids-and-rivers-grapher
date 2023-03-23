@@ -48,21 +48,17 @@ class Graph {
                     postfix = ""
                 )
 
-
-
-
-
-
-            val midten = sortedEdges()
+            val linklinjer = sortedEdges()
                 .mapIndexed { index, d ->
-                    d to "linkStyle $index stroke:red;"
+                    d to index
                 }.filter { it.first.hasEvent(eventName) }
-                .map(Pair<Edge, String>::second)
+                .toMap().values.joinToString (",")
 
             val harEdge = sortedEdges().any { it.hasEvent(eventName) }
-            val slutt = (if(harEdge) "\nclassDef x stroke: red;" else "")  + "\n```"
 
-            val verdi = midten.joinToString(separator = "\n", prefix = "$start\n\n", postfix = slutt)
+            val slutt = (if(harEdge) "linkStyle $linklinjer stroke:red;\nclassDef x stroke: red;" else "")  + "\n```"
+
+            val verdi = start + "\n\n" + slutt
 
             eventName to verdi
         }.toMap()
