@@ -7,7 +7,7 @@ class Node private constructor(private val navn: String): Comparable<Node> {
 
     fun addEdgeTo(tilNode: Node, eventName: String) {
         val edge = mutableEdges.firstOrNull { it.isEdgeOf(this to tilNode) }
-        if (edge == null) mutableEdges += Edge(this, tilNode, listOf(eventName))
+        if (edge == null) mutableEdges += Edge(this, tilNode, setOf(eventName))
         else edge.addEventName(eventName)
     }
 

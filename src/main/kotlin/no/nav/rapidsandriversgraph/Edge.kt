@@ -1,8 +1,8 @@
 package no.nav.rapidsandriversgraph
 
 
-class Edge(private val startNode: Node, private val endNode: Node, eventNames: List<String>): Comparable<Edge> {
-    private val eventNames = eventNames.toMutableList()
+class Edge(private val startNode: Node, private val endNode: Node, eventNames: Set<String>): Comparable<Edge> {
+    private val eventNames = eventNames.toMutableSet()
     fun isEdgeOf(annenNode: Pair<Node, Node>) = startNode == annenNode.first && endNode == annenNode.second
     fun addEventName(eventName: String) {
         eventNames+=eventName
