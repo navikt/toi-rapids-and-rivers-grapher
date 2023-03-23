@@ -79,11 +79,12 @@ class GraphTest {
             rekrutteringsbistand-stilling-api;
             toi-arbeidsmarked-cv --> toi-sammenstille-kandidat;
             toi-identmapper --> toi-sammenstille-kandidat;
-            toi-oppfolgingsinformasjon --> toi-identmapper;
+            toi-oppfolgingsinformasjon:::x --> toi-identmapper:::x;
             toi-oppfolgingsperiode --> toi-sammenstille-kandidat;
             toi-sammenstille-kandidat --> toi-synlighetsmotor;
             
             linkStyle 2 stroke:red;
+            classDef x stroke: red;
             ```
         """.trimIndent(), mermaidGraphPerEvent["oppfølgingsinformasjon"]
         )
@@ -95,14 +96,15 @@ class GraphTest {
             ---
             graph TD;
             rekrutteringsbistand-stilling-api;
-            toi-arbeidsmarked-cv --> toi-sammenstille-kandidat;
+            toi-arbeidsmarked-cv:::x --> toi-sammenstille-kandidat:::x;
             toi-identmapper --> toi-sammenstille-kandidat;
             toi-oppfolgingsinformasjon --> toi-identmapper;
             toi-oppfolgingsperiode --> toi-sammenstille-kandidat;
-            toi-sammenstille-kandidat --> toi-synlighetsmotor;
+            toi-sammenstille-kandidat:::x --> toi-synlighetsmotor:::x;
             
             linkStyle 0 stroke:red;
             linkStyle 4 stroke:red;
+            classDef x stroke: red;
             ```
         """.trimIndent(), mermaidGraphPerEvent["arbeidsmarked-cv.sammenstilt"]
         )
@@ -117,11 +119,12 @@ class GraphTest {
             toi-arbeidsmarked-cv --> toi-sammenstille-kandidat;
             toi-identmapper --> toi-sammenstille-kandidat;
             toi-oppfolgingsinformasjon --> toi-identmapper;
-            toi-oppfolgingsperiode --> toi-sammenstille-kandidat;
-            toi-sammenstille-kandidat --> toi-synlighetsmotor;
+            toi-oppfolgingsperiode:::x --> toi-sammenstille-kandidat:::x;
+            toi-sammenstille-kandidat:::x --> toi-synlighetsmotor:::x;
             
             linkStyle 3 stroke:red;
             linkStyle 4 stroke:red;
+            classDef x stroke: red;
             ```
         """.trimIndent(), mermaidGraphPerEvent["oppfølgingsperiode.sammenstilt"]
         )
@@ -134,14 +137,15 @@ class GraphTest {
             graph TD;
             rekrutteringsbistand-stilling-api;
             toi-arbeidsmarked-cv --> toi-sammenstille-kandidat;
-            toi-identmapper --> toi-sammenstille-kandidat;
-            toi-oppfolgingsinformasjon --> toi-identmapper;
+            toi-identmapper:::x --> toi-sammenstille-kandidat:::x;
+            toi-oppfolgingsinformasjon:::x --> toi-identmapper:::x;
             toi-oppfolgingsperiode --> toi-sammenstille-kandidat;
-            toi-sammenstille-kandidat --> toi-synlighetsmotor;
+            toi-sammenstille-kandidat:::x --> toi-synlighetsmotor:::x;
             
             linkStyle 1 stroke:red;
             linkStyle 2 stroke:red;
             linkStyle 4 stroke:red;
+            classDef x stroke: red;
             ```
         """.trimIndent(), mermaidGraphPerEvent["oppfølgingsinformasjon.sammenstilt"]
         )

@@ -12,17 +12,17 @@ class Graph {
         }
     }
 
-    fun tilMermaidGraph() =
-        (nodeMermaidTextDefinition() + edgeMermaidTextDefinition())
+    fun tilMermaidGraph(eventName: String = "") =
+        (nodeMermaidTextDefinition() + edgeMermaidTextDefinition(eventName))
         .joinToString(
             separator = "\n",
             prefix = "```mermaid\ngraph TD;\n",
             postfix = "\n```"
         )
 
-    private fun edgeMermaidTextDefinition() =
+    private fun edgeMermaidTextDefinition(eventName: String) =
         sortedEdges()
-            .map(Edge::toMermaidTextDefinition)
+            .map { it.toMermaidTextDefinition(eventName) }
 
     private fun sortedEdges() = nodes
         .flatMap(Node::edges)
@@ -41,14 +41,16 @@ class Graph {
         eventNames.map { eventName ->
 
 
-            val start = (nodeMermaidTextDefinition() + edgeMermaidTextDefinition())
+            val start = (nodeMermaidTextDefinition() + edgeMermaidTextDefinition(eventName))
                 .joinToString(
                     separator = "\n",
                     prefix = "```mermaid\n---\ntitle: $eventName\n---\ngraph TD;\n",
                     postfix = ""
                 )
 
-            val slutt = "\n```"
+
+
+
 
 
             val midten = sortedEdges()
@@ -56,6 +58,9 @@ class Graph {
                     d to "linkStyle $index stroke:red;"
                 }.filter { it.first.hasEvent(eventName) }
                 .map(Pair<Edge, String>::second)
+
+            val harEdge = sortedEdges().any { it.hasEvent(eventName) }
+            val slutt = (if(harEdge) "\nclassDef x stroke: red;" else "")  + "\n```"
 
             val verdi = midten.joinToString(separator = "\n", prefix = "$start\n\n", postfix = slutt)
 
