@@ -30,13 +30,7 @@ class ValidEvent(private val eventName: String, private val besøkteRapidService
 
     override fun plus(eventNames: Set<String>) = eventNames + eventName
     override fun skipEvent(): Boolean =
-        eventName in setOf(
-            "application_down",
-            "application_stop",
-            "application_ready",
-            "application_not_ready",
-            "application_up",
-        )
+        Regex("""^application_.*""").matches(eventName)
 }
 
 private fun String.parseEventName(): String =

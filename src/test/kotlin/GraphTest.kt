@@ -176,7 +176,7 @@ class GraphTest {
             
             ```
         """.trimIndent(), lagTestGraph(listOf(dummyEvent("application_up"))).tilMermaidGraph()
-        )/*
+        )
         assertEquals(
             """
             ```mermaid
@@ -208,7 +208,7 @@ class GraphTest {
 
             ```
         """.trimIndent(), lagTestGraph(listOf(dummyEvent("application_stop"))).tilMermaidGraph()
-        )*/
+        )
     }
 
     @Test
