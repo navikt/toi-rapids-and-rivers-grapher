@@ -6,10 +6,8 @@ class Graph {
     private var eventNames = setOf<String>()
 
     fun lesInnEvent(event: Event) {
-        if(!event.skipEvent()) {
-            nodes = nodes + event.toNodes()
-            eventNames = event + eventNames
-        }
+        nodes = nodes + event.toNodes()
+        eventNames = event + eventNames
     }
 
     fun tilMermaidGraph(eventName: String = "") =

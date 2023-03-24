@@ -3,12 +3,24 @@ package no.nav.rapidsandriversgraph
 import kotlinx.serialization.json.*
 import org.apache.kafka.clients.consumer.ConsumerRecord
 
-
 interface Event {
     fun toNodes(): Set<Node>
     operator fun plus(eventNames: Set<String>): Set<String>
+    companion object {
+        private val eventnameFilterRegex = Regex("""^application_.*""")
 
-    fun skipEvent(): Boolean
+        fun ConsumerRecord<String, String>.tilEvent() = try {
+            val eventName = value().parseEventName()
+
+            if(eventnameFilterRegex.matches(eventName)) {
+                UninterestingEvent()
+            } else {
+                ValidEvent(eventName, value().parseBesøkteServicer())
+            }
+        } catch (e: Exception) {
+            InvalidEvent(e)
+        }
+    }
 }
 
 class InvalidEvent(e: Exception) : Event {
@@ -18,7 +30,6 @@ class InvalidEvent(e: Exception) : Event {
 
     override fun toNodes(): Set<Node> = emptySet()
     override fun plus(eventNames: Set<String>) = eventNames
-    override fun skipEvent() = true
 }
 
 class ValidEvent(private val eventName: String, private val besøkteRapidServicer: List<String>) : Event {
@@ -29,8 +40,11 @@ class ValidEvent(private val eventName: String, private val besøkteRapidService
     }
 
     override fun plus(eventNames: Set<String>) = eventNames + eventName
-    override fun skipEvent(): Boolean =
-        Regex("""^application_.*""").matches(eventName)
+}
+
+class UninterestingEvent: Event {
+    override fun toNodes(): Set<Node> = emptySet()
+    override fun plus(eventNames: Set<String>): Set<String> = eventNames
 }
 
 private fun String.parseEventName(): String =
@@ -45,9 +59,3 @@ private fun String.parseBesøkteServicer(): List<String> =
 
 
 fun JsonElement?.asTextNullable() = this?.jsonPrimitive?.content
-
-fun ConsumerRecord<String, String>.tilEvent() = try {
-    ValidEvent(value().parseEventName(), value().parseBesøkteServicer())
-} catch (e: Exception) {
-    InvalidEvent(e)
-}

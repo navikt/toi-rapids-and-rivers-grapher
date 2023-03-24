@@ -1,5 +1,6 @@
 package no.nav.rapidsandriversgraph
 
+import no.nav.rapidsandriversgraph.Event.Companion.tilEvent
 import org.apache.kafka.clients.CommonClientConfigs
 import org.apache.kafka.clients.consumer.ConsumerConfig
 import org.apache.kafka.clients.consumer.KafkaConsumer
