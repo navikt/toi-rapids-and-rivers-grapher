@@ -6,8 +6,6 @@ import org.apache.kafka.clients.producer.ProducerConfig
 import org.apache.kafka.clients.producer.ProducerRecord
 import org.apache.kafka.common.config.SaslConfigs
 import org.apache.kafka.common.serialization.StringSerializer
-import org.assertj.core.api.Assertions
-import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeAll
@@ -21,15 +19,18 @@ class ITest {
     @Test
     fun test() {
         val mermaids = mutableListOf<String>()
-        val mermaidSpy: (String) -> Unit = {mermaids.add(it)}
-        val producer = KafkaProducer<String,String>(producerProperties())
-        (events()+ invalidJsonEvent).forEach { producer.send(ProducerRecord(topic, it)) }
+        val mermaidSpy: (String) -> Unit = { mermaids.add(it) }
+        val producer = KafkaProducer<String, String>(producerProperties())
+        (events() + invalidJsonEvent).forEach { producer.send(ProducerRecord(topic, it)) }
         sleep(1000)
-        startApplication(mermaidSpy, mapOf(
-            "KAFKA_BROKERS" to kafkaContainer.bootstrapServers
-        ))
+        startApplication(
+            mermaidSpy, mapOf(
+                "KAFKA_BROKERS" to kafkaContainer.bootstrapServers
+            )
+        )
         assertEquals(1, mermaids.size)
-        assertEquals("""
+        assertEquals(
+            """
             ```mermaid
             graph TD;
             rekrutteringsbistand-stilling-api;
@@ -39,7 +40,8 @@ class ITest {
             toi-oppfolgingsperiode --> toi-sammenstille-kandidat;
             toi-sammenstille-kandidat --> toi-synlighetsmotor;
             ```
-            kandidat.cv-delt-med-arbeidsgiver-via-rekrutteringsbistand
+            <details><summary>kandidat.cv-delt-med-arbeidsgiver-via-rekrutteringsbistand</summary>
+            
             ```mermaid
             graph TD;
             rekrutteringsbistand-stilling-api;
@@ -51,7 +53,10 @@ class ITest {
             
             
             ```
-            oppfølgingsinformasjon
+            
+            </details>
+            <details><summary>oppfølgingsinformasjon</summary>
+            
             ```mermaid
             graph TD;
             rekrutteringsbistand-stilling-api;
@@ -64,7 +69,10 @@ class ITest {
             linkStyle 2 stroke:red;
             classDef x stroke: red;
             ```
-            arbeidsmarked-cv.sammenstilt
+            
+            </details>
+            <details><summary>arbeidsmarked-cv.sammenstilt</summary>
+            
             ```mermaid
             graph TD;
             rekrutteringsbistand-stilling-api;
@@ -77,7 +85,10 @@ class ITest {
             linkStyle 0,4 stroke:red;
             classDef x stroke: red;
             ```
-            oppfølgingsperiode.sammenstilt
+            
+            </details>
+            <details><summary>oppfølgingsperiode.sammenstilt</summary>
+            
             ```mermaid
             graph TD;
             rekrutteringsbistand-stilling-api;
@@ -90,7 +101,10 @@ class ITest {
             linkStyle 3,4 stroke:red;
             classDef x stroke: red;
             ```
-            oppfølgingsinformasjon.sammenstilt
+            
+            </details>
+            <details><summary>oppfølgingsinformasjon.sammenstilt</summary>
+            
             ```mermaid
             graph TD;
             rekrutteringsbistand-stilling-api;
@@ -103,8 +117,12 @@ class ITest {
             linkStyle 1,2,4 stroke:red;
             classDef x stroke: red;
             ```
-        """.trimIndent(), mermaids.first())
+            
+            </details>
+        """.trimIndent(), mermaids.first()
+        )
     }
+
     companion object {
         private val kafkaContainer = KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:7.3.1"))
         private val topic = "toi.rapid-1"

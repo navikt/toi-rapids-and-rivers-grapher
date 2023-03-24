@@ -45,7 +45,8 @@ class GraphTest {
     fun byggGraphForEventUtenEdges() {
         assertEquals(
             """
-            kandidat.cv-delt-med-arbeidsgiver-via-rekrutteringsbistand
+            <details><summary>kandidat.cv-delt-med-arbeidsgiver-via-rekrutteringsbistand</summary>
+            
             ```mermaid
             graph TD;
             rekrutteringsbistand-stilling-api;
@@ -57,6 +58,8 @@ class GraphTest {
             
             
             ```
+            
+            </details>
         """.trimIndent(),
             lagTestGraph()
                 .tilMermaidGraphPerEvent()["kandidat.cv-delt-med-arbeidsgiver-via-rekrutteringsbistand"]
@@ -69,7 +72,8 @@ class GraphTest {
 
         assertEquals(
             """
-            oppfølgingsinformasjon
+            <details><summary>oppfølgingsinformasjon</summary>
+            
             ```mermaid
             graph TD;
             rekrutteringsbistand-stilling-api;
@@ -82,11 +86,14 @@ class GraphTest {
             linkStyle 2 stroke:red;
             classDef x stroke: red;
             ```
+            
+            </details>
         """.trimIndent(), mermaidGraphPerEvent["oppfølgingsinformasjon"]
         )
         assertEquals(
             """
-            arbeidsmarked-cv.sammenstilt
+            <details><summary>arbeidsmarked-cv.sammenstilt</summary>
+            
             ```mermaid
             graph TD;
             rekrutteringsbistand-stilling-api;
@@ -99,11 +106,14 @@ class GraphTest {
             linkStyle 0,4 stroke:red;
             classDef x stroke: red;
             ```
+            
+            </details>
         """.trimIndent(), mermaidGraphPerEvent["arbeidsmarked-cv.sammenstilt"],
         )
         assertEquals(
             """
-            oppfølgingsperiode.sammenstilt
+            <details><summary>oppfølgingsperiode.sammenstilt</summary>
+            
             ```mermaid
             graph TD;
             rekrutteringsbistand-stilling-api;
@@ -116,11 +126,14 @@ class GraphTest {
             linkStyle 3,4 stroke:red;
             classDef x stroke: red;
             ```
+            
+            </details>
         """.trimIndent(), mermaidGraphPerEvent["oppfølgingsperiode.sammenstilt"]
         )
         assertEquals(
             """
-            oppfølgingsinformasjon.sammenstilt
+            <details><summary>oppfølgingsinformasjon.sammenstilt</summary>
+          
             ```mermaid
             graph TD;
             rekrutteringsbistand-stilling-api;
@@ -133,6 +146,8 @@ class GraphTest {
             linkStyle 1,2,4 stroke:red;
             classDef x stroke: red;
             ```
+            
+            </details>
         """.trimIndent(), mermaidGraphPerEvent["oppfølgingsinformasjon.sammenstilt"]
         )
     }
