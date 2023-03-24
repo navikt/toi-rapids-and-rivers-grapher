@@ -1410,7 +1410,8 @@ toi-veileder --> toi-sammenstille-kandidat;
 linkStyle 18,19,22,23,25,26,29,30,31,33 stroke:red;
 classDef x stroke: red;
 ```
-tiltakAvtaleIngått
+<details>
+<summary>tiltakAvtaleIngått</summary>
 ```mermaid
 graph TD;
 foresporsel-om-deling-av-cv-api --> foresporsel-om-deling-av-cv-api;
@@ -1453,6 +1454,7 @@ toi-veileder --> toi-sammenstille-kandidat;
 linkStyle 8,10,20 stroke:red;
 classDef x stroke: red;
 ```
+</details>
 
 
 # Definisjoner 
