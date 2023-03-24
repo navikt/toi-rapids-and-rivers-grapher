@@ -1,7 +1,7 @@
 # Autogenerer graph for trafikken på toi-rapiden
 Denne applikasjonen kjører hver midnatt og logger en mermaid-graph som viser hvordan applikasjonene på rapiden prater sammen:
 
-Oppdatert 2023-03-23
+Oppdatert 2023-03-24
 ```mermaid
 graph TD;
 foresporsel-om-deling-av-cv-api --> foresporsel-om-deling-av-cv-api;
@@ -41,10 +41,8 @@ toi-synlighetsmotor --> toi-kandidatfeed;
 toi-tilretteleggingsbehov --> toi-sammenstille-kandidat;
 toi-veileder --> toi-sammenstille-kandidat;
 ```
+arbeidsmarked-cv.sammenstilt
 ```mermaid
----
-title: arbeidsmarked-cv.sammenstilt
----
 graph TD;
 foresporsel-om-deling-av-cv-api --> foresporsel-om-deling-av-cv-api;
 foresporsel-om-deling-av-cv-api --> rekrutteringsbistand-stilling-api;
@@ -86,10 +84,8 @@ toi-veileder --> toi-sammenstille-kandidat;
 linkStyle 15,18,19,22,23,25,26,29,30,31,33 stroke:red;
 classDef x stroke: red;
 ```
+arbeidsmarked-cv
 ```mermaid
----
-title: arbeidsmarked-cv
----
 graph TD;
 foresporsel-om-deling-av-cv-api --> foresporsel-om-deling-av-cv-api;
 foresporsel-om-deling-av-cv-api --> rekrutteringsbistand-stilling-api;
@@ -130,10 +126,8 @@ toi-veileder --> toi-sammenstille-kandidat;
 
 
 ```
+fritatt-kandidatsøk
 ```mermaid
----
-title: fritatt-kandidatsøk
----
 graph TD;
 foresporsel-om-deling-av-cv-api --> foresporsel-om-deling-av-cv-api;
 foresporsel-om-deling-av-cv-api --> rekrutteringsbistand-stilling-api;
@@ -175,10 +169,8 @@ toi-veileder --> toi-sammenstille-kandidat;
 linkStyle 16 stroke:red;
 classDef x stroke: red;
 ```
+fritatt-kandidatsøk.sammenstilt
 ```mermaid
----
-title: fritatt-kandidatsøk.sammenstilt
----
 graph TD;
 foresporsel-om-deling-av-cv-api --> foresporsel-om-deling-av-cv-api;
 foresporsel-om-deling-av-cv-api --> rekrutteringsbistand-stilling-api;
@@ -220,10 +212,8 @@ toi-veileder --> toi-sammenstille-kandidat;
 linkStyle 16,18,19,21,22,23,25,26,29,30,31,33 stroke:red;
 classDef x stroke: red;
 ```
+oppfølgingsinformasjon
 ```mermaid
----
-title: oppfølgingsinformasjon
----
 graph TD;
 foresporsel-om-deling-av-cv-api --> foresporsel-om-deling-av-cv-api;
 foresporsel-om-deling-av-cv-api --> rekrutteringsbistand-stilling-api;
@@ -265,10 +255,8 @@ toi-veileder --> toi-sammenstille-kandidat;
 linkStyle 27 stroke:red;
 classDef x stroke: red;
 ```
+oppfølgingsinformasjon.sammenstilt
 ```mermaid
----
-title: oppfølgingsinformasjon.sammenstilt
----
 graph TD;
 foresporsel-om-deling-av-cv-api --> foresporsel-om-deling-av-cv-api;
 foresporsel-om-deling-av-cv-api --> rekrutteringsbistand-stilling-api;
@@ -310,10 +298,8 @@ toi-veileder --> toi-sammenstille-kandidat;
 linkStyle 18,19,21,22,23,25,26,27,29,30,31,33 stroke:red;
 classDef x stroke: red;
 ```
+hjemmel
 ```mermaid
----
-title: hjemmel
----
 graph TD;
 foresporsel-om-deling-av-cv-api --> foresporsel-om-deling-av-cv-api;
 foresporsel-om-deling-av-cv-api --> rekrutteringsbistand-stilling-api;
@@ -354,10 +340,8 @@ toi-veileder --> toi-sammenstille-kandidat;
 
 
 ```
+hjemmel.sammenstilt
 ```mermaid
----
-title: hjemmel.sammenstilt
----
 graph TD;
 foresporsel-om-deling-av-cv-api --> foresporsel-om-deling-av-cv-api;
 foresporsel-om-deling-av-cv-api --> rekrutteringsbistand-stilling-api;
@@ -399,10 +383,8 @@ toi-veileder --> toi-sammenstille-kandidat;
 linkStyle 17,18,19,22,23,25,26,29,30,31,33 stroke:red;
 classDef x stroke: red;
 ```
+veileder
 ```mermaid
----
-title: veileder
----
 graph TD;
 foresporsel-om-deling-av-cv-api --> foresporsel-om-deling-av-cv-api;
 foresporsel-om-deling-av-cv-api --> rekrutteringsbistand-stilling-api;
@@ -443,10 +425,8 @@ toi-veileder --> toi-sammenstille-kandidat;
 
 
 ```
+veileder.sammenstilt
 ```mermaid
----
-title: veileder.sammenstilt
----
 graph TD;
 foresporsel-om-deling-av-cv-api --> foresporsel-om-deling-av-cv-api;
 foresporsel-om-deling-av-cv-api --> rekrutteringsbistand-stilling-api;
@@ -488,10 +468,8 @@ toi-veileder:::x --> toi-sammenstille-kandidat:::x;
 linkStyle 18,19,22,23,25,26,29,30,31,33,35 stroke:red;
 classDef x stroke: red;
 ```
+kandidat_v2.RegistrertFåttJobben
 ```mermaid
----
-title: kandidat_v2.RegistrertFåttJobben
----
 graph TD;
 foresporsel-om-deling-av-cv-api --> foresporsel-om-deling-av-cv-api;
 foresporsel-om-deling-av-cv-api --> rekrutteringsbistand-stilling-api;
@@ -533,10 +511,8 @@ toi-veileder --> toi-sammenstille-kandidat;
 linkStyle 7,8,13,14 stroke:red;
 classDef x stroke: red;
 ```
+kandidat_v2.LukketKandidatliste
 ```mermaid
----
-title: kandidat_v2.LukketKandidatliste
----
 graph TD;
 foresporsel-om-deling-av-cv-api:::x --> foresporsel-om-deling-av-cv-api:::x;
 foresporsel-om-deling-av-cv-api:::x --> rekrutteringsbistand-stilling-api:::x;
@@ -578,10 +554,8 @@ toi-veileder --> toi-sammenstille-kandidat;
 linkStyle 0,1,2,3,4,5,7,11,12,14 stroke:red;
 classDef x stroke: red;
 ```
+oppfølgingsperiode
 ```mermaid
----
-title: oppfølgingsperiode
----
 graph TD;
 foresporsel-om-deling-av-cv-api --> foresporsel-om-deling-av-cv-api;
 foresporsel-om-deling-av-cv-api --> rekrutteringsbistand-stilling-api;
@@ -622,10 +596,8 @@ toi-veileder --> toi-sammenstille-kandidat;
 
 
 ```
+oppfølgingsperiode.sammenstilt
 ```mermaid
----
-title: oppfølgingsperiode.sammenstilt
----
 graph TD;
 foresporsel-om-deling-av-cv-api --> foresporsel-om-deling-av-cv-api;
 foresporsel-om-deling-av-cv-api --> rekrutteringsbistand-stilling-api;
@@ -667,10 +639,8 @@ toi-veileder --> toi-sammenstille-kandidat;
 linkStyle 18,19,22,23,25,26,28,29,30,31,33 stroke:red;
 classDef x stroke: red;
 ```
+må-behandle-tidligere-cv
 ```mermaid
----
-title: må-behandle-tidligere-cv
----
 graph TD;
 foresporsel-om-deling-av-cv-api --> foresporsel-om-deling-av-cv-api;
 foresporsel-om-deling-av-cv-api --> rekrutteringsbistand-stilling-api;
@@ -711,10 +681,8 @@ toi-veileder --> toi-sammenstille-kandidat;
 
 
 ```
+må-behandle-tidligere-cv.sammenstilt
 ```mermaid
----
-title: må-behandle-tidligere-cv.sammenstilt
----
 graph TD;
 foresporsel-om-deling-av-cv-api --> foresporsel-om-deling-av-cv-api;
 foresporsel-om-deling-av-cv-api --> rekrutteringsbistand-stilling-api;
@@ -756,10 +724,8 @@ toi-veileder --> toi-sammenstille-kandidat;
 linkStyle 18,19,22,23,24,25,26,29,30,31,33 stroke:red;
 classDef x stroke: red;
 ```
+unknown event
 ```mermaid
----
-title: unknown event
----
 graph TD;
 foresporsel-om-deling-av-cv-api --> foresporsel-om-deling-av-cv-api;
 foresporsel-om-deling-av-cv-api --> rekrutteringsbistand-stilling-api;
@@ -801,10 +767,8 @@ toi-veileder --> toi-sammenstille-kandidat;
 linkStyle 8,10,20 stroke:red;
 classDef x stroke: red;
 ```
+tilretteleggingsbehov
 ```mermaid
----
-title: tilretteleggingsbehov
----
 graph TD;
 foresporsel-om-deling-av-cv-api --> foresporsel-om-deling-av-cv-api;
 foresporsel-om-deling-av-cv-api --> rekrutteringsbistand-stilling-api;
@@ -845,10 +809,8 @@ toi-veileder --> toi-sammenstille-kandidat;
 
 
 ```
+tilretteleggingsbehov.sammenstilt
 ```mermaid
----
-title: tilretteleggingsbehov.sammenstilt
----
 graph TD;
 foresporsel-om-deling-av-cv-api --> foresporsel-om-deling-av-cv-api;
 foresporsel-om-deling-av-cv-api --> rekrutteringsbistand-stilling-api;
@@ -890,10 +852,8 @@ toi-veileder --> toi-sammenstille-kandidat;
 linkStyle 18,19,22,23,25,26,29,30,31,33,34 stroke:red;
 classDef x stroke: red;
 ```
+siste14avedtak
 ```mermaid
----
-title: siste14avedtak
----
 graph TD;
 foresporsel-om-deling-av-cv-api --> foresporsel-om-deling-av-cv-api;
 foresporsel-om-deling-av-cv-api --> rekrutteringsbistand-stilling-api;
@@ -934,10 +894,8 @@ toi-veileder --> toi-sammenstille-kandidat;
 
 
 ```
+siste14avedtak.sammenstilt
 ```mermaid
----
-title: siste14avedtak.sammenstilt
----
 graph TD;
 foresporsel-om-deling-av-cv-api --> foresporsel-om-deling-av-cv-api;
 foresporsel-om-deling-av-cv-api --> rekrutteringsbistand-stilling-api;
@@ -979,10 +937,8 @@ toi-veileder --> toi-sammenstille-kandidat;
 linkStyle 18,19,22,23,25,26,29,30,31,32,33 stroke:red;
 classDef x stroke: red;
 ```
+kandidat_v2.OppdaterteKandidatliste
 ```mermaid
----
-title: kandidat_v2.OppdaterteKandidatliste
----
 graph TD;
 foresporsel-om-deling-av-cv-api --> foresporsel-om-deling-av-cv-api;
 foresporsel-om-deling-av-cv-api --> rekrutteringsbistand-stilling-api;
@@ -1024,10 +980,8 @@ toi-veileder --> toi-sammenstille-kandidat;
 linkStyle 7,8,13,14 stroke:red;
 classDef x stroke: red;
 ```
+arbeidsgiversKandidatliste.VisningKontaktinfo
 ```mermaid
----
-title: arbeidsgiversKandidatliste.VisningKontaktinfo
----
 graph TD;
 foresporsel-om-deling-av-cv-api --> foresporsel-om-deling-av-cv-api;
 foresporsel-om-deling-av-cv-api --> rekrutteringsbistand-stilling-api;
@@ -1069,10 +1023,8 @@ toi-veileder --> toi-sammenstille-kandidat;
 linkStyle 8 stroke:red;
 classDef x stroke: red;
 ```
+kandidat_v2.DelCvMedArbeidsgiver
 ```mermaid
----
-title: kandidat_v2.DelCvMedArbeidsgiver
----
 graph TD;
 foresporsel-om-deling-av-cv-api:::x --> foresporsel-om-deling-av-cv-api:::x;
 foresporsel-om-deling-av-cv-api:::x --> rekrutteringsbistand-stilling-api:::x;
@@ -1114,10 +1066,8 @@ toi-veileder --> toi-sammenstille-kandidat;
 linkStyle 0,1,4,6,7,8,9,11,13,14 stroke:red;
 classDef x stroke: red;
 ```
+notifikasjon.cv-delt
 ```mermaid
----
-title: notifikasjon.cv-delt
----
 graph TD;
 foresporsel-om-deling-av-cv-api --> foresporsel-om-deling-av-cv-api;
 foresporsel-om-deling-av-cv-api --> rekrutteringsbistand-stilling-api;
@@ -1159,10 +1109,8 @@ toi-veileder --> toi-sammenstille-kandidat;
 linkStyle 14 stroke:red;
 classDef x stroke: red;
 ```
+kandidat_v2.OpprettetKandidatliste
 ```mermaid
----
-title: kandidat_v2.OpprettetKandidatliste
----
 graph TD;
 foresporsel-om-deling-av-cv-api --> foresporsel-om-deling-av-cv-api;
 foresporsel-om-deling-av-cv-api --> rekrutteringsbistand-stilling-api;
@@ -1204,10 +1152,8 @@ toi-veileder --> toi-sammenstille-kandidat;
 linkStyle 7,8,13,14 stroke:red;
 classDef x stroke: red;
 ```
+kandidat_v2.RegistrertDeltCv
 ```mermaid
----
-title: kandidat_v2.RegistrertDeltCv
----
 graph TD;
 foresporsel-om-deling-av-cv-api --> foresporsel-om-deling-av-cv-api;
 foresporsel-om-deling-av-cv-api --> rekrutteringsbistand-stilling-api;
@@ -1249,10 +1195,8 @@ toi-veileder --> toi-sammenstille-kandidat;
 linkStyle 7,8,13,14 stroke:red;
 classDef x stroke: red;
 ```
+kandidat_v2.SlettFraArbeidsgiversKandidatliste
 ```mermaid
----
-title: kandidat_v2.SlettFraArbeidsgiversKandidatliste
----
 graph TD;
 foresporsel-om-deling-av-cv-api --> foresporsel-om-deling-av-cv-api;
 foresporsel-om-deling-av-cv-api --> rekrutteringsbistand-stilling-api;
@@ -1294,10 +1238,8 @@ toi-veileder --> toi-sammenstille-kandidat;
 linkStyle 2,3,5,7,12,14 stroke:red;
 classDef x stroke: red;
 ```
+kandidat_v2.SlettetStillingOgKandidatliste
 ```mermaid
----
-title: kandidat_v2.SlettetStillingOgKandidatliste
----
 graph TD;
 foresporsel-om-deling-av-cv-api --> foresporsel-om-deling-av-cv-api;
 foresporsel-om-deling-av-cv-api --> rekrutteringsbistand-stilling-api;
@@ -1339,10 +1281,8 @@ toi-veileder --> toi-sammenstille-kandidat;
 linkStyle 2,3,5,7,8,12,13,14 stroke:red;
 classDef x stroke: red;
 ```
+kandidat_v2.FjernetRegistreringFåttJobben
 ```mermaid
----
-title: kandidat_v2.FjernetRegistreringFåttJobben
----
 graph TD;
 foresporsel-om-deling-av-cv-api --> foresporsel-om-deling-av-cv-api;
 foresporsel-om-deling-av-cv-api --> rekrutteringsbistand-stilling-api;
@@ -1384,10 +1324,8 @@ toi-veileder --> toi-sammenstille-kandidat;
 linkStyle 7,8,13,14 stroke:red;
 classDef x stroke: red;
 ```
+kandidat_v2.FjernetRegistreringDeltCv
 ```mermaid
----
-title: kandidat_v2.FjernetRegistreringDeltCv
----
 graph TD;
 foresporsel-om-deling-av-cv-api --> foresporsel-om-deling-av-cv-api;
 foresporsel-om-deling-av-cv-api --> rekrutteringsbistand-stilling-api;
@@ -1429,10 +1367,8 @@ toi-veileder --> toi-sammenstille-kandidat;
 linkStyle 7,8,13,14 stroke:red;
 classDef x stroke: red;
 ```
+republisert.sammenstilt
 ```mermaid
----
-title: republisert.sammenstilt
----
 graph TD;
 foresporsel-om-deling-av-cv-api --> foresporsel-om-deling-av-cv-api;
 foresporsel-om-deling-av-cv-api --> rekrutteringsbistand-stilling-api;
@@ -1474,10 +1410,8 @@ toi-veileder --> toi-sammenstille-kandidat;
 linkStyle 18,19,22,23,25,26,29,30,31,33 stroke:red;
 classDef x stroke: red;
 ```
+tiltakAvtaleIngått
 ```mermaid
----
-title: tiltakAvtaleIngått
----
 graph TD;
 foresporsel-om-deling-av-cv-api --> foresporsel-om-deling-av-cv-api;
 foresporsel-om-deling-av-cv-api --> rekrutteringsbistand-stilling-api;
