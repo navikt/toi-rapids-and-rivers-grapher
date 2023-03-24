@@ -31,94 +31,94 @@ class ITest {
         assertEquals(1, mermaids.size)
         assertEquals(
             """
-            ```mermaid
-            graph TD;
-            rekrutteringsbistand-stilling-api;
-            toi-arbeidsmarked-cv --> toi-sammenstille-kandidat;
-            toi-identmapper --> toi-sammenstille-kandidat;
-            toi-oppfolgingsinformasjon --> toi-identmapper;
-            toi-oppfolgingsperiode --> toi-sammenstille-kandidat;
-            toi-sammenstille-kandidat --> toi-synlighetsmotor;
-            ```
-            <details><summary>kandidat.cv-delt-med-arbeidsgiver-via-rekrutteringsbistand</summary>
-            
-            ```mermaid
-            graph TD;
-            rekrutteringsbistand-stilling-api;
-            toi-arbeidsmarked-cv --> toi-sammenstille-kandidat;
-            toi-identmapper --> toi-sammenstille-kandidat;
-            toi-oppfolgingsinformasjon --> toi-identmapper;
-            toi-oppfolgingsperiode --> toi-sammenstille-kandidat;
-            toi-sammenstille-kandidat --> toi-synlighetsmotor;
-            
-            
-            ```
-            
-            </details>
-            <details><summary>oppfølgingsinformasjon</summary>
-            
-            ```mermaid
-            graph TD;
-            rekrutteringsbistand-stilling-api;
-            toi-arbeidsmarked-cv --> toi-sammenstille-kandidat;
-            toi-identmapper --> toi-sammenstille-kandidat;
-            toi-oppfolgingsinformasjon:::x --> toi-identmapper:::x;
-            toi-oppfolgingsperiode --> toi-sammenstille-kandidat;
-            toi-sammenstille-kandidat --> toi-synlighetsmotor;
-            
-            linkStyle 2 stroke:red;
-            classDef x stroke: red;
-            ```
-            
-            </details>
-            <details><summary>arbeidsmarked-cv.sammenstilt</summary>
-            
-            ```mermaid
-            graph TD;
-            rekrutteringsbistand-stilling-api;
-            toi-arbeidsmarked-cv:::x --> toi-sammenstille-kandidat:::x;
-            toi-identmapper --> toi-sammenstille-kandidat;
-            toi-oppfolgingsinformasjon --> toi-identmapper;
-            toi-oppfolgingsperiode --> toi-sammenstille-kandidat;
-            toi-sammenstille-kandidat:::x --> toi-synlighetsmotor:::x;
-            
-            linkStyle 0,4 stroke:red;
-            classDef x stroke: red;
-            ```
-            
-            </details>
-            <details><summary>oppfølgingsperiode.sammenstilt</summary>
-            
-            ```mermaid
-            graph TD;
-            rekrutteringsbistand-stilling-api;
-            toi-arbeidsmarked-cv --> toi-sammenstille-kandidat;
-            toi-identmapper --> toi-sammenstille-kandidat;
-            toi-oppfolgingsinformasjon --> toi-identmapper;
-            toi-oppfolgingsperiode:::x --> toi-sammenstille-kandidat:::x;
-            toi-sammenstille-kandidat:::x --> toi-synlighetsmotor:::x;
-            
-            linkStyle 3,4 stroke:red;
-            classDef x stroke: red;
-            ```
-            
-            </details>
-            <details><summary>oppfølgingsinformasjon.sammenstilt</summary>
-            
-            ```mermaid
-            graph TD;
-            rekrutteringsbistand-stilling-api;
-            toi-arbeidsmarked-cv --> toi-sammenstille-kandidat;
-            toi-identmapper:::x --> toi-sammenstille-kandidat:::x;
-            toi-oppfolgingsinformasjon:::x --> toi-identmapper:::x;
-            toi-oppfolgingsperiode --> toi-sammenstille-kandidat;
-            toi-sammenstille-kandidat:::x --> toi-synlighetsmotor:::x;
-            
-            linkStyle 1,2,4 stroke:red;
-            classDef x stroke: red;
-            ```
-            
-            </details>
+                ```mermaid
+                graph TD;
+                rekrutteringsbistand-stilling-api;
+                toi-arbeidsmarked-cv --> toi-sammenstille-kandidat;
+                toi-identmapper --> toi-sammenstille-kandidat;
+                toi-oppfolgingsinformasjon --> toi-identmapper;
+                toi-oppfolgingsperiode --> toi-sammenstille-kandidat;
+                toi-sammenstille-kandidat --> toi-synlighetsmotor;
+                ```
+                <details><summary>arbeidsmarked-cv.sammenstilt</summary>
+                
+                ```mermaid
+                graph TD;
+                rekrutteringsbistand-stilling-api;
+                toi-arbeidsmarked-cv:::x --> toi-sammenstille-kandidat:::x;
+                toi-identmapper --> toi-sammenstille-kandidat;
+                toi-oppfolgingsinformasjon --> toi-identmapper;
+                toi-oppfolgingsperiode --> toi-sammenstille-kandidat;
+                toi-sammenstille-kandidat:::x --> toi-synlighetsmotor:::x;
+                
+                linkStyle 0,4 stroke:red;
+                classDef x stroke: red;
+                ```
+                
+                </details>
+                <details><summary>kandidat.cv-delt-med-arbeidsgiver-via-rekrutteringsbistand</summary>
+                
+                ```mermaid
+                graph TD;
+                rekrutteringsbistand-stilling-api;
+                toi-arbeidsmarked-cv --> toi-sammenstille-kandidat;
+                toi-identmapper --> toi-sammenstille-kandidat;
+                toi-oppfolgingsinformasjon --> toi-identmapper;
+                toi-oppfolgingsperiode --> toi-sammenstille-kandidat;
+                toi-sammenstille-kandidat --> toi-synlighetsmotor;
+                
+                
+                ```
+                
+                </details>
+                <details><summary>oppfølgingsinformasjon</summary>
+                
+                ```mermaid
+                graph TD;
+                rekrutteringsbistand-stilling-api;
+                toi-arbeidsmarked-cv --> toi-sammenstille-kandidat;
+                toi-identmapper --> toi-sammenstille-kandidat;
+                toi-oppfolgingsinformasjon:::x --> toi-identmapper:::x;
+                toi-oppfolgingsperiode --> toi-sammenstille-kandidat;
+                toi-sammenstille-kandidat --> toi-synlighetsmotor;
+                
+                linkStyle 2 stroke:red;
+                classDef x stroke: red;
+                ```
+                
+                </details>
+                <details><summary>oppfølgingsinformasjon.sammenstilt</summary>
+                
+                ```mermaid
+                graph TD;
+                rekrutteringsbistand-stilling-api;
+                toi-arbeidsmarked-cv --> toi-sammenstille-kandidat;
+                toi-identmapper:::x --> toi-sammenstille-kandidat:::x;
+                toi-oppfolgingsinformasjon:::x --> toi-identmapper:::x;
+                toi-oppfolgingsperiode --> toi-sammenstille-kandidat;
+                toi-sammenstille-kandidat:::x --> toi-synlighetsmotor:::x;
+                
+                linkStyle 1,2,4 stroke:red;
+                classDef x stroke: red;
+                ```
+                
+                </details>
+                <details><summary>oppfølgingsperiode.sammenstilt</summary>
+                
+                ```mermaid
+                graph TD;
+                rekrutteringsbistand-stilling-api;
+                toi-arbeidsmarked-cv --> toi-sammenstille-kandidat;
+                toi-identmapper --> toi-sammenstille-kandidat;
+                toi-oppfolgingsinformasjon --> toi-identmapper;
+                toi-oppfolgingsperiode:::x --> toi-sammenstille-kandidat:::x;
+                toi-sammenstille-kandidat:::x --> toi-synlighetsmotor:::x;
+                
+                linkStyle 3,4 stroke:red;
+                classDef x stroke: red;
+                ```
+                
+                </details>
         """.trimIndent(), mermaids.first()
         )
     }
