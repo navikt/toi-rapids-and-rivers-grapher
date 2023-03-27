@@ -51,8 +51,6 @@ class GraphTest {
             toi-oppfolgingsinformasjon --> toi-identmapper;
             toi-oppfolgingsperiode --> toi-sammenstille-kandidat;
             toi-sammenstille-kandidat --> toi-synlighetsmotor;
-            
-            
         """.trimIndent(),
             lagTestGraph()
                 .tilMermaidGraphPerEvent()["kandidat.cv-delt-med-arbeidsgiver-via-rekrutteringsbistand"]

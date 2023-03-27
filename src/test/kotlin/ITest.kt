@@ -66,8 +66,6 @@ class ITest {
                 toi-oppfolgingsinformasjon --> toi-identmapper;
                 toi-oppfolgingsperiode --> toi-sammenstille-kandidat;
                 toi-sammenstille-kandidat --> toi-synlighetsmotor;
-                
-                
                 ```
                 
                 </details>

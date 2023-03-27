@@ -34,30 +34,28 @@ class Graph {
         .flatMap(Node::edges)
         .any { it.hasNode(node) }
 
-    fun tilMermaidGraphPerEvent(): Map<String, String> =
-        eventNames
-            .sorted().associateWith { eventName ->
-                val start = (nodeMermaidTextDefinition() + edgeMermaidTextDefinition(eventName))
-                    .joinToString(
-                        separator = "\n",
-                        prefix = "graph TD;\n",
-                        postfix = ""
-                    )
+    fun tilMermaidGraphPerEvent(): Map<String, String> = eventNames.sorted().associateWith(::tilMermaidGraphForEvent)
 
-                val linklinjer = sortedEdges()
-                    .mapIndexed { index, d ->
-                        d to index
-                    }.filter { it.first.hasEvent(eventName) }
-                    .toMap().values.joinToString(",")
+    private fun tilMermaidGraphForEvent(eventName: String): String {
 
-                val harEdge = sortedEdges().any { it.hasEvent(eventName) }
+        return (nodeMermaidTextDefinition() + edgeMermaidTextDefinition(eventName))
+            .joinToString(
+                separator = "\n",
+                prefix = "graph TD;\n",
+                postfix = leggPåFarger(eventName)
+            )
+    }
 
-                val slutt =
-                    (if (harEdge) "linkStyle $linklinjer stroke:red;\nclassDef x stroke: red;" else "")
+    private fun leggPåFarger(eventName: String) =
+        if (eventHarEdge(eventName)) sortedEdges()
+            .mapIndexed { index, edge ->
+                edge to index
+            }.filter { it.first.hasEvent(eventName) }
+            .toMap()
+            .values
+            .joinToString(",")
+            .let { "\n\nlinkStyle $it stroke:red;\nclassDef x stroke: red;" }
+        else ""
 
-                val verdi = start + "\n\n" + slutt
-
-                verdi
-            }
-
+    private fun eventHarEdge(eventName: String) = sortedEdges().any { it.hasEvent(eventName) }
 }
