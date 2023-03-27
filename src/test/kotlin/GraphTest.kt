@@ -58,8 +58,9 @@ class GraphTest {
     }
 
     @Test
-    fun byggGraphPerPerEvent() {
+    fun byggGraphPerEvent() {
         val mermaidGraphPerEvent = lagTestGraph().tilMermaidGraphPerEvent()
+        assertEquals(5, mermaidGraphPerEvent.size)
 
         assertEquals(
             """
