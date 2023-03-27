@@ -28,7 +28,6 @@ class GraphTest {
 
         assertEquals(
             """
-            ```mermaid
             graph TD;
             rekrutteringsbistand-stilling-api;
             toi-arbeidsmarked-cv --> toi-sammenstille-kandidat;
@@ -36,7 +35,6 @@ class GraphTest {
             toi-oppfolgingsinformasjon --> toi-identmapper;
             toi-oppfolgingsperiode --> toi-sammenstille-kandidat;
             toi-sammenstille-kandidat --> toi-synlighetsmotor;
-            ```
         """.trimIndent(),
             lagTestGraph().tilMermaidGraph()
         )
@@ -46,9 +44,6 @@ class GraphTest {
     fun byggGraphForEventUtenEdges() {
         assertEquals(
             """
-            <details><summary>kandidat.cv-delt-med-arbeidsgiver-via-rekrutteringsbistand</summary>
-            
-            ```mermaid
             graph TD;
             rekrutteringsbistand-stilling-api;
             toi-arbeidsmarked-cv --> toi-sammenstille-kandidat;
@@ -58,9 +53,6 @@ class GraphTest {
             toi-sammenstille-kandidat --> toi-synlighetsmotor;
             
             
-            ```
-            
-            </details>
         """.trimIndent(),
             lagTestGraph()
                 .tilMermaidGraphPerEvent()["kandidat.cv-delt-med-arbeidsgiver-via-rekrutteringsbistand"]
@@ -73,9 +65,6 @@ class GraphTest {
 
         assertEquals(
             """
-            <details><summary>oppfølgingsinformasjon</summary>
-            
-            ```mermaid
             graph TD;
             rekrutteringsbistand-stilling-api;
             toi-arbeidsmarked-cv --> toi-sammenstille-kandidat;
@@ -86,16 +75,10 @@ class GraphTest {
             
             linkStyle 2 stroke:red;
             classDef x stroke: red;
-            ```
-            
-            </details>
         """.trimIndent(), mermaidGraphPerEvent["oppfølgingsinformasjon"]
         )
         assertEquals(
             """
-            <details><summary>arbeidsmarked-cv.sammenstilt</summary>
-            
-            ```mermaid
             graph TD;
             rekrutteringsbistand-stilling-api;
             toi-arbeidsmarked-cv:::x --> toi-sammenstille-kandidat:::x;
@@ -106,16 +89,10 @@ class GraphTest {
             
             linkStyle 0,4 stroke:red;
             classDef x stroke: red;
-            ```
-            
-            </details>
         """.trimIndent(), mermaidGraphPerEvent["arbeidsmarked-cv.sammenstilt"],
         )
         assertEquals(
             """
-            <details><summary>oppfølgingsperiode.sammenstilt</summary>
-            
-            ```mermaid
             graph TD;
             rekrutteringsbistand-stilling-api;
             toi-arbeidsmarked-cv --> toi-sammenstille-kandidat;
@@ -126,16 +103,10 @@ class GraphTest {
             
             linkStyle 3,4 stroke:red;
             classDef x stroke: red;
-            ```
-            
-            </details>
         """.trimIndent(), mermaidGraphPerEvent["oppfølgingsperiode.sammenstilt"]
         )
         assertEquals(
             """
-            <details><summary>oppfølgingsinformasjon.sammenstilt</summary>
-          
-            ```mermaid
             graph TD;
             rekrutteringsbistand-stilling-api;
             toi-arbeidsmarked-cv --> toi-sammenstille-kandidat;
@@ -146,9 +117,6 @@ class GraphTest {
             
             linkStyle 1,2,4 stroke:red;
             classDef x stroke: red;
-            ```
-            
-            </details>
         """.trimIndent(), mermaidGraphPerEvent["oppfølgingsinformasjon.sammenstilt"]
         )
     }
@@ -157,18 +125,14 @@ class GraphTest {
     fun ignorererInvalidEvents() {
         assertEquals(
             """
-            ```mermaid
             graph TD;
             
-            ```
         """.trimIndent(), lagTestGraph(listOf(invalidJsonEvent)).tilMermaidGraph()
         )
         assertEquals(
             """
-            ```mermaid
             graph TD;
             
-            ```
         """.trimIndent(),
             lagTestGraph(listOf(invalidSystemParticipatingServicesEvent)).tilMermaidGraph()
         )
@@ -177,42 +141,32 @@ class GraphTest {
     fun ignorererEventerSomSkalSkippes() {
         assertEquals(
             """
-            ```mermaid
             graph TD;
             
-            ```
         """.trimIndent(), lagTestGraph(listOf(dummyEvent("application_up"))).tilMermaidGraph()
         )
         assertEquals(
             """
-            ```mermaid
             graph TD;
 
-            ```
         """.trimIndent(), lagTestGraph(listOf(dummyEvent("application_down"))).tilMermaidGraph()
         )
         assertEquals(
             """
-            ```mermaid
             graph TD;
 
-            ```
         """.trimIndent(), lagTestGraph(listOf(dummyEvent("application_not_ready"))).tilMermaidGraph()
         )
         assertEquals(
             """
-            ```mermaid
             graph TD;
 
-            ```
         """.trimIndent(), lagTestGraph(listOf(dummyEvent("application_ready"))).tilMermaidGraph()
         )
         assertEquals(
             """
-            ```mermaid
             graph TD;
 
-            ```
         """.trimIndent(), lagTestGraph(listOf(dummyEvent("application_stop"))).tilMermaidGraph()
         )
     }
@@ -221,10 +175,8 @@ class GraphTest {
     fun brukEventerSomIkkeSkalSkippes() {
         assertEquals(
             """
-            ```mermaid
             graph TD;
             toi-oppfolgingsinformasjon --> toi-identmapper;
-            ```
         """.trimIndent(), lagTestGraph(listOf(dummyEvent("ikke_skip"))).tilMermaidGraph()
         )
     }

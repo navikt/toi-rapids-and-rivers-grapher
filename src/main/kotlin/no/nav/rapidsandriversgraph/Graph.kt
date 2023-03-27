@@ -14,8 +14,7 @@ class Graph {
         (nodeMermaidTextDefinition() + edgeMermaidTextDefinition(eventName))
             .joinToString(
                 separator = "\n",
-                prefix = "```mermaid\ngraph TD;\n",
-                postfix = "\n```"
+                prefix = "graph TD;\n"
             )
 
     private fun edgeMermaidTextDefinition(eventName: String) =
@@ -38,14 +37,10 @@ class Graph {
     fun tilMermaidGraphPerEvent(): Map<String, String> =
         eventNames
             .sorted().associateWith { eventName ->
-
-
-                val title = "<details><summary>$eventName</summary>\n\n"
-
                 val start = (nodeMermaidTextDefinition() + edgeMermaidTextDefinition(eventName))
                     .joinToString(
                         separator = "\n",
-                        prefix = "$title```mermaid\ngraph TD;\n",
+                        prefix = "graph TD;\n",
                         postfix = ""
                     )
 
@@ -58,7 +53,7 @@ class Graph {
                 val harEdge = sortedEdges().any { it.hasEvent(eventName) }
 
                 val slutt =
-                    (if (harEdge) "linkStyle $linklinjer stroke:red;\nclassDef x stroke: red;" else "") + "\n```\n\n</details>"
+                    (if (harEdge) "linkStyle $linklinjer stroke:red;\nclassDef x stroke: red;" else "")
 
                 val verdi = start + "\n\n" + slutt
 

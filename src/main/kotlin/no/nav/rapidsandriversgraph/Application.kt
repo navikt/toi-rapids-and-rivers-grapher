@@ -28,9 +28,13 @@ fun startApplication(mermaidWriter: (String) -> Unit, envs: Map<String, String>)
             .map {it.tilEvent()}
             .forEach(graph::lesInnEvent)
     }
-    val wholeGraph = listOf(graph.tilMermaidGraph(""))
-    val graphPerEvent = graph.tilMermaidGraphPerEvent().map { it.value }
-    mermaidWriter((wholeGraph+graphPerEvent).joinToString("\n"))
+    mermaidWriter(
+        "```mermaid\n${graph.tilMermaidGraph()}\n```\n"
+                + graph.tilMermaidGraphPerEvent()
+            .map { (eventName, mermaidGraph) ->
+                "<details><summary>$eventName</summary>\n\n```mermaid\n$mermaidGraph\n```\n\n</details>"
+            }.joinToString(separator = "\n")
+    )
 }
 
 fun consumerConfig(envs: Map<String, String>) = mutableMapOf<String, Any>(
