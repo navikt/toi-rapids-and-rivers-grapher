@@ -60,22 +60,8 @@ class GraphTest {
     @Test
     fun byggGraphPerEvent() {
         val mermaidGraphPerEvent = lagTestGraph().tilMermaidGraphPerEvent()
-        assertEquals(5, mermaidGraphPerEvent.size)
+        assertEquals(4, mermaidGraphPerEvent.size)
 
-        assertEquals(
-            """
-            graph TD;
-            rekrutteringsbistand-stilling-api;
-            toi-arbeidsmarked-cv --> toi-sammenstille-kandidat;
-            toi-identmapper --> toi-sammenstille-kandidat;
-            toi-oppfolgingsinformasjon:::x --> toi-identmapper:::x;
-            toi-oppfolgingsperiode --> toi-sammenstille-kandidat;
-            toi-sammenstille-kandidat --> toi-synlighetsmotor;
-            
-            linkStyle 2 stroke:red;
-            classDef x stroke: red;
-        """.trimIndent(), mermaidGraphPerEvent["oppfølgingsinformasjon"]
-        )
         assertEquals(
             """
             graph TD;
@@ -88,7 +74,7 @@ class GraphTest {
             
             linkStyle 0,4 stroke:red;
             classDef x stroke: red;
-        """.trimIndent(), mermaidGraphPerEvent["arbeidsmarked-cv.sammenstilt"],
+        """.trimIndent(), mermaidGraphPerEvent["arbeidsmarked-cv"],
         )
         assertEquals(
             """
@@ -102,7 +88,7 @@ class GraphTest {
             
             linkStyle 3,4 stroke:red;
             classDef x stroke: red;
-        """.trimIndent(), mermaidGraphPerEvent["oppfølgingsperiode.sammenstilt"]
+        """.trimIndent(), mermaidGraphPerEvent["oppfølgingsperiode"]
         )
         assertEquals(
             """
@@ -116,7 +102,7 @@ class GraphTest {
             
             linkStyle 1,2,4 stroke:red;
             classDef x stroke: red;
-        """.trimIndent(), mermaidGraphPerEvent["oppfølgingsinformasjon.sammenstilt"]
+        """.trimIndent(), mermaidGraphPerEvent["oppfølgingsinformasjon"]
         )
     }
 
@@ -363,7 +349,7 @@ fun events() = listOf(
               "image": "ghcr.io/navikt/toi-rapids-and-rivers/toi-synlighetsmotor:333dd8d9c539a459adbb27470d7151656f9b1a90"
             }
           ],
-          "@event_name": "arbeidsmarked-cv.sammenstilt",
+          "@event_name": "arbeidsmarked-cv",
           "synlighet": {
             "erSynlig": false,
             "ferdigBeregnet": true,
@@ -416,7 +402,7 @@ fun events() = listOf(
               "image": "ghcr.io/navikt/toi-rapids-and-rivers/toi-synlighetsmotor:333dd8d9c539a459adbb27470d7151656f9b1a90"
             }
           ],
-          "@event_name": "oppfølgingsperiode.sammenstilt",
+          "@event_name": "oppfølgingsperiode",
           "synlighet": {
             "erSynlig": false,
             "ferdigBeregnet": false,
@@ -563,7 +549,7 @@ fun events() = listOf(
               "image": "ghcr.io/navikt/toi-rapids-and-rivers/toi-synlighetsmotor:333dd8d9c539a459adbb27470d7151656f9b1a90"
             }
           ],
-          "@event_name": "oppfølgingsinformasjon.sammenstilt",
+          "@event_name": "oppfølgingsinformasjon",
           "synlighet": {
             "erSynlig": false,
             "ferdigBeregnet": true,

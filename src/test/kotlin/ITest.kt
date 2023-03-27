@@ -40,7 +40,7 @@ class ITest {
                 toi-oppfolgingsperiode --> toi-sammenstille-kandidat;
                 toi-sammenstille-kandidat --> toi-synlighetsmotor;
                 ```
-                <details><summary>arbeidsmarked-cv.sammenstilt</summary>
+                <details><summary>arbeidsmarked-cv</summary>
                 
                 ```mermaid
                 graph TD;
@@ -75,22 +75,6 @@ class ITest {
                 graph TD;
                 rekrutteringsbistand-stilling-api;
                 toi-arbeidsmarked-cv --> toi-sammenstille-kandidat;
-                toi-identmapper --> toi-sammenstille-kandidat;
-                toi-oppfolgingsinformasjon:::x --> toi-identmapper:::x;
-                toi-oppfolgingsperiode --> toi-sammenstille-kandidat;
-                toi-sammenstille-kandidat --> toi-synlighetsmotor;
-                
-                linkStyle 2 stroke:red;
-                classDef x stroke: red;
-                ```
-                
-                </details>
-                <details><summary>oppfølgingsinformasjon.sammenstilt</summary>
-                
-                ```mermaid
-                graph TD;
-                rekrutteringsbistand-stilling-api;
-                toi-arbeidsmarked-cv --> toi-sammenstille-kandidat;
                 toi-identmapper:::x --> toi-sammenstille-kandidat:::x;
                 toi-oppfolgingsinformasjon:::x --> toi-identmapper:::x;
                 toi-oppfolgingsperiode --> toi-sammenstille-kandidat;
@@ -101,7 +85,7 @@ class ITest {
                 ```
                 
                 </details>
-                <details><summary>oppfølgingsperiode.sammenstilt</summary>
+                <details><summary>oppfølgingsperiode</summary>
                 
                 ```mermaid
                 graph TD;
