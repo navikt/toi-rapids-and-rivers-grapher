@@ -1,5 +1,12 @@
 package no.nav.rapidsandriversgraph
 
+import io.ktor.http.*
+import io.ktor.server.application.*
+import io.ktor.server.engine.*
+import io.ktor.server.netty.*
+import io.ktor.server.request.*
+import io.ktor.server.response.*
+import io.ktor.server.routing.*
 import no.nav.rapidsandriversgraph.Event.Companion.tilEvent
 import org.apache.kafka.clients.CommonClientConfigs
 import org.apache.kafka.clients.consumer.ConsumerConfig
@@ -53,7 +60,25 @@ fun consumerConfig(envs: Map<String, String>) = mutableMapOf<String, Any>(
     }
 }
 
-fun main() = startApplication(log::info, System.getenv())
+fun main() = {
+    val envs = System.getenv()
+    var filecontent: String? = null
+    embeddedServer(Netty, 8080) {
+        install(Routing) {
+            get("schema") {
+                if(call.request.header("Authorization")?.replace("Bearer ", "")!=envs["SECRET_API_CODE"]) {
+                    call.respond(HttpStatusCode.Unauthorized)
+                } else {
+                    filecontent?.let {
+                        call.respond(HttpStatusCode.OK, it)
+                        System.exit(0)
+                    } ?: call.respond(HttpStatusCode.NoContent)
+                }
+            }
+        }
+    }.start()
+    startApplication({filecontent = it}, envs)
+}
 
 
 private fun Map<String, String>.hentEllerFeil(key: String) = get(key) ?: feil("$key er ikke satt")

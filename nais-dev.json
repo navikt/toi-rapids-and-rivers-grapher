@@ -1,0 +1,6 @@
+{
+  "ingresses": [
+    "https://toi-rapids-and-rivers-grapher.intern.dev.nav.no"
+  ],
+  "kafka_pool": "nav-dev"
+}

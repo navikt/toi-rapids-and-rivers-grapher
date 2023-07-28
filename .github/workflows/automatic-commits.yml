@@ -1,0 +1,53 @@
+name: Automatic commits
+
+on:
+  push:
+    branches:
+      - main
+      - automatic
+
+jobs:
+  deploy_and_rest_call:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Generate Random Secret
+        id: generate_secret
+        run: echo "::set-output name=secret::$(openssl rand -hex 16)"
+
+      - name: NAIS Deploy
+        uses: nais/deploy/actions/deploy@v1
+        env:
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          CLUSTER: dev-gcp
+          RESOURCE: nais.yaml
+          VARS: nais-dev.yaml
+          VAR: secret=${{ steps.generate_secret.outputs.secret }}
+
+      - name: Make REST call
+        env:
+          SECRET_TOKEN: ${{ steps.generate_secret.outputs.secret }}
+        run: |
+          # Perform the REST call here and use $SECRET_TOKEN as an authentication token
+          # For example, using curl:
+          curl -H "Authorization: Bearer $SECRET_TOKEN" -o result.json https://api.example.com/data
+          RESULT=$(curl -s -w '%{http_code}' -o result.json https://api.example.com/data)
+          while [[ $(echo "$RESULT" | tail -c 4) != "200" ]]; do
+            sleep 5  # Wait for 5 seconds before the next retry
+            RESULT=$(curl -s -w '%{http_code}' -o result.json https://api.example.com/data)
+          done
+          echo "::set-output name=result::$(cat result.json)"
+
+      - name: Commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Update data from REST call" || true
+
+      - name: Push changes
+        uses: ad-m/github-push-action@v0.5.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
