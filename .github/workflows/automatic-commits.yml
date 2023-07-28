@@ -64,11 +64,11 @@ jobs:
         run: |
           # Perform the REST call here and use $SECRET_TOKEN as an authentication token
           # For example, using curl:
-          curl -H "Authorization: Bearer $SECRET_TOKEN" -o result.json https://api.example.com/data
-          RESULT=$(curl -s -w '%{http_code}' -o result.json https://api.example.com/data)
+          curl -H "Authorization: Bearer $SECRET_TOKEN" -o result.json https://toi-rapids-and-rivers-grapher.intern.dev.nav.no/schema
+          RESULT=$(curl -s -w '%{http_code}' -o result.json https://toi-rapids-and-rivers-grapher.intern.dev.nav.no/schema)
           while [[ $(echo "$RESULT" | tail -c 4) != "200" ]]; do
             sleep 5  # Wait for 5 seconds before the next retry
-            RESULT=$(curl -s -w '%{http_code}' -o result.json https://api.example.com/data)
+            RESULT=$(curl -s -w '%{http_code}' -o result.json https://toi-rapids-and-rivers-grapher.intern.dev.nav.no/schema)
           done
           echo "::set-output name=result::$(cat result.json)"
 

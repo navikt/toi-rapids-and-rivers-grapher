@@ -60,7 +60,7 @@ fun consumerConfig(envs: Map<String, String>) = mutableMapOf<String, Any>(
     }
 }
 
-fun main() = {
+fun main() {
     val envs = System.getenv()
     var filecontent: String? = null
     embeddedServer(Netty, 8080) {
