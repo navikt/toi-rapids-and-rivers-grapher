@@ -40,6 +40,7 @@ jobs:
           docker push ${IMAGE}
   deploy_and_rest_call:
     runs-on: ubuntu-latest
+    needs: build-and-publish
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
