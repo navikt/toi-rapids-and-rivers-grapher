@@ -11,6 +11,33 @@ on:
       - automatic
 
 jobs:
+  build-and-publish:
+    name: Build, test, and publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Setup Java v17.x
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17.x'
+      - name: Gradle test and build
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          chmod +x ./gradlew
+          ./gradlew test build
+      - name: Docker login
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and publish docker image
+        run: |
+          docker build --tag ${IMAGE} .
+          docker push ${IMAGE}
   deploy_and_rest_call:
     runs-on: ubuntu-latest
     steps:
