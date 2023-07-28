@@ -1,4 +1,4 @@
-name: Automatic commits
+name: Automatic
 
 env:
   IMAGE: ghcr.io/${{ github.repository }}/${{ github.workflow }}:${{ github.sha }}
