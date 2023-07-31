@@ -7,6 +7,7 @@ import io.ktor.server.netty.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import kotlinx.coroutines.isActive
 import no.nav.rapidsandriversgraph.Event.Companion.tilEvent
 import org.apache.kafka.clients.CommonClientConfigs
 import org.apache.kafka.clients.consumer.ConsumerConfig
@@ -17,6 +18,9 @@ import org.apache.kafka.common.serialization.StringDeserializer
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.time.Duration
+import java.time.LocalDateTime
+import java.time.LocalDateTime.now
+import java.time.temporal.ChronoUnit
 
 val log: Logger = LoggerFactory.getLogger("no.nav.rapidsandriversgraph")
 
@@ -76,10 +80,14 @@ fun main() {
                 }
             }
         }
-    }.start()
+    }.start(wait = true)
     startApplication({filecontent = it}, envs)
+    val start = now()
+    while (ChronoUnit.HOURS.between(start, now()) < 3) {
+        Thread.sleep(10_000)
+    }
+    log.error("/schema not called within 3 hours. Shutting down.")
 }
-
 
 private fun Map<String, String>.hentEllerFeil(key: String) = get(key) ?: feil("$key er ikke satt")
 
