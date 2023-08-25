@@ -10,7 +10,9 @@ spec:
     pool: {{ kafka_pool }}
   image: {{ image }}
   ingresses:
-    - https://toi-rapids-and-rivers-grapher.intern.dev.nav.no
+    {{#each ingresses as |ingress|}}
+        - {{ingress }}
+      {{/each}}
   replicas:
     min: 1
     max: 1
