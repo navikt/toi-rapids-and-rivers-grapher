@@ -12,6 +12,7 @@ on:
 permissions:
   packages: write
   contents: read
+  id-token: write
 
 jobs:
   build-and-publish:
@@ -19,9 +20,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup Java v17.x
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17.x'
@@ -44,13 +45,12 @@ jobs:
   deploy-to-dev-gcp:
     name: Deploy to dev-gcp
     needs: build-and-publish
-    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/branch'
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/fjern-deployapikey'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: nais/deploy/actions/deploy@v1
+      - uses: actions/checkout@v4
+      - uses: nais/deploy/actions/deploy@v2
         env:
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: dev-gcp
           RESOURCE: nais.yaml
           VARS: nais-dev.yaml
@@ -60,10 +60,9 @@ jobs:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: nais/deploy/actions/deploy@v1
+      - uses: actions/checkout@v4
+      - uses: nais/deploy/actions/deploy@v2
         env:
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: prod-gcp
-          RESOURCE: nais.yaml
+          RESOURCE: nais.yaml,alerts.yaml
           VARS: nais-prod.yaml
