@@ -53,7 +53,12 @@ fun consumerConfig(envs: Map<String, String>) = mutableMapOf<String, Any>(
     }
 }
 
-fun main() = startApplication(log::info, System.getenv())
+fun main() = try {
+    startApplication(log::info, System.getenv())
+} catch (t: Throwable) {
+    log.error("Feil skjedde i Naisjob", t)
+    throw t
+}
 
 
 private fun Map<String, String>.hentEllerFeil(key: String) = get(key) ?: feil("$key er ikke satt")
