@@ -1,5 +1,6 @@
 # Autogenerer graph for trafikken på toi-rapiden
-Denne applikasjonen kjører hver midnatt og logger en mermaid-graph som viser hvordan applikasjonene på rapiden prater sammen:
+Denne naisjobben kjører hver natt og logger en mermaid-graph som viser hvordan applikasjonene på rapiden prater sammen.
+Logglinjen kan manuelt limes inn i denne readme-filen for å få en oversikt over rapid-arkitekturen.
 
 Oppdatert 2023-05-25
 ```mermaid
@@ -1136,17 +1137,24 @@ Noder og kanter som viser en oversikt over eventer mellom applikasjoner
 ### Node
 Node-representasjon av en rapid-service. 
 #### Edge
-Edge-representasjon av event som går  mellom to rapid-servicer
-Brukes inne i node for å vise hva som er neste node den peker på.
+Edge-representasjon av event som går mellom to rapid-servicer
+Retning på pilen viser hvilken vei eventen flyter igjennom applikasjonene
 
 ## Event
-Melding fra rapid
+Melding på rapid. Denne opprettes i en applikasjon og "flyter" fra rapid-service til rapid-service, som populerer denne.
 
 ## MermaidGraph
 Visualisering av mermaid-grafer basert på tekstedefinisjoner som kan tolkes i markup
 
 ### MermaidTextDefinition
 En linje i MermaidGraph
+
+
+# Troubleshooting
+
+## Slutt-applikasjonen for en hendelse får ikke en pil pekende på en selv
+For at grapheren skal plukke opp den siste applikasjonen som konsumerer en event, så må den siste applikasjonen republisere hendelsen. 
+For å unngå en evig loop ved en slik republisering kan man sette et felt til true, og sjekker at dette feltet ikke er satt ved konsumering ( rejectValue("@slutt_av_hendelseskjede", true) )
 
 
 # Henvendelser
