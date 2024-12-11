@@ -1,3 +1,6 @@
+> [!NOTE]
+> Dette er en uferdig "proof of concept" (i skrivende stund desember 2024).
+
 # Autogenerer graph for trafikken på toi-rapiden
 Denne naisjobben kjører hver natt og logger en mermaid-graph som viser hvordan applikasjonene på rapiden prater sammen.
 Logglinjen kan manuelt limes inn i denne readme-filen for å få en oversikt over rapid-arkitekturen.
