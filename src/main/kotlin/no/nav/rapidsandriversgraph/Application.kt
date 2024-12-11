@@ -54,10 +54,13 @@ fun consumerConfig(envs: Map<String, String>) = mutableMapOf<String, Any>(
 }
 
 fun main() = try {
+    log.info("Starter applikasjon")
     startApplication(log::info, System.getenv())
 } catch (t: Throwable) {
     log.error("Feil skjedde i Naisjob", t)
     throw t
+} finally {
+    log.info("Avslutter applikasjon")
 }
 
 
