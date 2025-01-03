@@ -19,11 +19,11 @@ fun startApplication(mermaidWriter: (String) -> Unit, envs: Map<String, String>)
     consumer.assign(topics)
     consumer.seekToEnd(topics)
     val lesTilOffset = consumer.position(topics[0])
-    log.info("Topic ${topics[0]} er nå på posisjon: $lesTilOffset")
+    mermaidWriter("Topic ${topics[0]} er nå på posisjon: $lesTilOffset")
     consumer.seekToBeginning(topics)
     val graph = Graph()
     while (lesTilOffset>consumer.position(topics[0])) {
-        log.info("Posisjonen er: ${consumer.position(topics[0])}")
+        mermaidWriter("Posisjonen er: ${consumer.position(topics[0])}")
         consumer.poll(Duration.ofSeconds(1))
             .map {it.tilEvent()}
             .forEach(graph::lesInnEvent)
