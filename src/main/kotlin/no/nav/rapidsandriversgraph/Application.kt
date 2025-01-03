@@ -19,22 +19,22 @@ fun startApplication(mermaidWriter: (String) -> Unit, envs: Map<String, String>)
     consumer.assign(topics)
     consumer.seekToEnd(topics)
     val lesTilOffset = consumer.position(topics[0])
-    mermaidWriter("Topic ${topics[0]} er nå på posisjon: $lesTilOffset")
+    log.info("Topic ${topics[0]} er nå på posisjon: $lesTilOffset")
     consumer.seekToBeginning(topics)
     val graph = Graph()
     while (lesTilOffset>consumer.position(topics[0])) {
-        mermaidWriter("Posisjonen er: ${consumer.position(topics[0])}")
+        log.info("Posisjonen er: ${consumer.position(topics[0])}")
         consumer.poll(Duration.ofSeconds(1))
             .map {it.tilEvent()}
             .forEach(graph::lesInnEvent)
     }
-    mermaidWriter(
-        "```mermaid\n${graph.tilMermaidGraph()}\n```\n"
-                + graph.tilMermaidGraphPerEvent()
-            .map { (eventName, mermaidGraph) ->
-                "<details><summary>$eventName</summary>\n\n```mermaid\n$mermaidGraph\n```\n\n</details>"
-            }.joinToString(separator = "\n")
-    )
+    val mermaidGraph = ("```mermaid\n${graph.tilMermaidGraph()}\n```\n"
+            + graph.tilMermaidGraphPerEvent()
+        .map { (eventName, mermaidGraph) ->
+            "<details><summary>$eventName</summary>\n\n```mermaid\n$mermaidGraph\n```\n\n</details>"
+        }.joinToString(separator = "\n"))
+    log.info(mermaidGraph)
+    mermaidWriter(mermaidGraph)
 }
 
 fun consumerConfig(envs: Map<String, String>) = mutableMapOf<String, Any>(
