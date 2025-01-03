@@ -9,4 +9,4 @@ spec:
   kafka:
     pool: {{ kafka_pool }}
   image: {{ image }}
-  schedule: "0 1 * * *"
+  #schedule: "0 1 * * *"
