@@ -28,6 +28,7 @@ fun startApplication(mermaidWriter: (String) -> Unit, envs: Map<String, String>)
             .map {it.tilEvent()}
             .forEach(graph::lesInnEvent)
     }
+    log.info("Har lest til slutt-offset")
     val mermaidGraph = ("```mermaid\n${graph.tilMermaidGraph()}\n```\n"
             + graph.tilMermaidGraphPerEvent()
         .map { (eventName, mermaidGraph) ->
