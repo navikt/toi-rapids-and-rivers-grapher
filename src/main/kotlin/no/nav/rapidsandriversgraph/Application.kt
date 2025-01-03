@@ -34,8 +34,10 @@ fun startApplication(mermaidWriter: (String) -> Unit, envs: Map<String, String>)
         .map { (eventName, mermaidGraph) ->
             "<details><summary>$eventName</summary>\n\n```mermaid\n$mermaidGraph\n```\n\n</details>"
         }.joinToString(separator = "\n"))
-    log.info(mermaidGraph)
+    log.info("Starter mermaid-logging")
+    log.info("Mermaid-greph: $mermaidGraph")
     mermaidWriter(mermaidGraph)
+    log.info("Ferdig med mermaid-logging")
 }
 
 fun consumerConfig(envs: Map<String, String>) = mutableMapOf<String, Any>(
