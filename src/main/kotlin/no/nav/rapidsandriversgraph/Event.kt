@@ -32,10 +32,17 @@ class InvalidEvent(e: Exception) : Event {
     override fun plus(eventNames: Set<String>) = eventNames
 }
 
+private val applikasjonerBesøktEtterStillingsApi = mutableSetOf<String>()
 class ValidEvent(private val eventName: String, private val besøkteRapidServicer: List<String>) : Event {
     override fun toNodes(): Set<Node> {
         val noder = besøkteRapidServicer.indices.map { Node.fra(besøkteRapidServicer[it]) }
         (0 until besøkteRapidServicer.size - 1).forEach { noder[it].addEdgeTo(noder[it + 1], eventName) }
+
+        val stillingsApiIndex = besøkteRapidServicer.indexOf("rekrutteringsbistand-stilling-api")
+        if(stillingsApiIndex != -1) {
+            applikasjonerBesøktEtterStillingsApi+=besøkteRapidServicer.subList(stillingsApiIndex+1, besøkteRapidServicer.size)
+            log.info("Besøkte applikasjoner etter stillings-api: $applikasjonerBesøktEtterStillingsApi")
+        }
         return noder.toSet()
     }
 
